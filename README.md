@@ -2,6 +2,8 @@
 
 <!-- badges: start -->
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Travis build status](https://travis-ci.org/trafficonese/daterangepicker.svg?branch=master)](https://travis-ci.org/trafficonese/daterangepicker)
+[![Codecov test coverage](https://codecov.io/gh/trafficonese/daterangepicker/branch/master/graph/badge.svg)](https://codecov.io/gh/trafficonese/daterangepicker?branch=master)
 <!-- badges: end -->
 
 Custom Shiny input binding for a [Date Range Picker](https://www.daterangepicker.com/).
@@ -27,10 +29,10 @@ ui <- fluidPage(
                         background-color: #96dafb;}")),
   daterangepicker(
     inputId = "daterange",
-    label = "Wählen Sie ein Datum aus",
+    label = "Pick a Date",
     start = Sys.Date() - 30, end = Sys.Date(),
     max = as.character(Sys.Date()),
-    language = "de",
+    language = "en",
     style = "width:100%; border-radius:4px",
     class = "myclass",
     icon = icon("calendar")

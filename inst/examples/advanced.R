@@ -12,14 +12,14 @@ ui <- fluidPage(
                         background-color: #96dafb;}")),
   daterangepicker(
     inputId = "daterange",
-    label = "Wählen Sie ein Datum aus",
+    label = "Pick a Date",
     start = start, end = end,
-    max = as.character(Sys.Date()),
-    ranges = list("Gestern" = Sys.Date() - 1,
-                  "Heute" = Sys.Date(),
-                  "Letzten 3 Tage" = c(Sys.Date() - 2, Sys.Date()),
-                  "Letzten 7 Tage" = c(Sys.Date() - 6, Sys.Date()),
-                  "Letzten 45 Tage" = c(Sys.Date() - 44, Sys.Date())
+    max = end,
+    ranges = list("Today" = Sys.Date(),
+                  "Yesterday" = Sys.Date() - 1,
+                  "Last 3 days" = c(Sys.Date() - 2, Sys.Date()),
+                  "Last 7 days" = c(Sys.Date() - 6, Sys.Date()),
+                  "Last 45 days" = c(Sys.Date() - 44, Sys.Date())
     ),
     language = "de",
     style = "width:100%; border-radius:4px",
@@ -44,9 +44,9 @@ ui <- fluidPage(
         direction = 'ltr',  ## or rtl
         separator = ' <-> ',
         format = 'LL',      ## 'DD-MM-Y HH:MM:SS',
-        applyLabel = 'Bestätigen',
-        cancelLabel = 'Abbrechen',
-        customRangeLabel = 'Freier Zeitraum',
+        applyLabel = 'Apply',
+        cancelLabel = 'Cancel',
+        customRangeLabel = 'Free Range',
         weekLabel = 'W',
         firstDay = 1,
         daysOfWeek = format(seq.Date(as.Date("2000-01-03"),
@@ -68,28 +68,19 @@ ui <- fluidPage(
                   }')
   ),
   verbatimTextOutput("print"),
-  br(),br(),  br(),br(),
-  div(id = "add_date_here", class = "add_date_here",
-      "Does the Datepicker come here?",
-      span()),
   actionButton("act", "Update Daterangepicker")
 )
 
 ## SERVER ##########################
 server <- function(input, output, session) {
-  observe({
-    print(paste("The date is:", input$daterange))
-  })
   output$print <- renderPrint({
     req(input$daterange)
     input$daterange
   })
   observeEvent(input$act, {
-    end <- Sys.Date() - 30
-    start <- end - 30
     updateDaterangepicker(session, "daterange", label = "new Label",
-                          start = start, end = end,
-                          icon = icon("car"),
+                          start = Sys.Date() - 60, end = Sys.Date() - 30,
+                          icon = icon("calendar-check"),
                           options = list(
                             minYear = 2019, maxYear = 2022,
                             showDropdowns = FALSE,
@@ -99,10 +90,5 @@ server <- function(input, output, session) {
                           ))
   })
 }
-
-print(paste("Start is:", start));
-print(paste("End is:", end))
-print(paste("Start is:", as.POSIXct(start)));
-print(paste("End is:", as.POSIXct(end)))
 
 shinyApp(ui, server)
