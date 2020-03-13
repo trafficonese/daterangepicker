@@ -7,56 +7,23 @@
 daterangepicker(
   inputId = NULL,
   label = "Select a Date",
-  icon = NULL,
-  style = "width:100\%; border-radius:4px",
-  language = "en",
-  class = NULL,
   start = NULL,
   end = NULL,
-  showDropdowns = TRUE,
-  minDate = NULL,
-  maxDate = NULL,
-  minYear = NULL,
-  maxYear = NULL,
+  min = NULL,
+  max = NULL,
   ranges = NULL,
-  showCustomRangeLabel = TRUE,
-  opens = c("right", "left", "center"),
-  drops = c("down", "up"),
-  timePicker = FALSE,
-  timePickerIncrement = 0,
-  timePicker24Hour = FALSE,
-  timePickerSeconds = FALSE,
-  showWeekNumbers = TRUE,
-  showISOWeekNumbers = TRUE,
-  parentEl = NULL,
-  maxSpan = NULL,
-  alwaysShowCalendars = FALSE,
-  buttonClasses = NULL,
-  applyButtonClasses = NULL,
-  cancelButtonClasses = NULL,
-  locale = NULL,
-  singleDatePicker = FALSE,
-  autoApply = FALSE,
-  linkedCalendars = FALSE,
-  isInvalidDate = NULL,
-  isCustomDate = NULL,
-  autoUpdateInput = NULL
+  language = "en",
+  style = "width:100\%;border-radius:4px;text-align:center;",
+  class = NULL,
+  icon = NULL,
+  options = daterangepickerOptions(),
+  initCallback = NULL
 )
 }
 \arguments{
 \item{inputId}{(string) The input ID}
 
 \item{label}{(string) The label for the control, or NULL for no label.}
-
-\item{icon}{(shiny.tag) Icon to display next to the label.}
-
-\item{style}{(string) Add some CSS-styles to the input.}
-
-\item{language}{(string) The language used for month and day names. Default
-is "en". See the \href{https://momentjs.com/}{Multipe Locale Support} for a
-list of other valid values.}
-
-\item{class}{(string) A custom class}
 
 \item{start}{(Date or string) The beginning date of the initially selected
 date range. If you provide a string, it must match the date format string
@@ -65,106 +32,29 @@ set in your locale setting.}
 \item{end}{(Date or string) The end date of the initially selected date
 range.}
 
-\item{showDropdowns}{(boolean) Show year and month select boxes above
-calendars to jump to a specific month and year.}
+\item{min}{(Date or string) The earliest date a user may select.}
 
-\item{minDate}{(Date or string) The earliest date a user may select.}
-
-\item{maxDate}{(Date or string) The latest date a user may select.}
-
-\item{minYear}{(numeric) The minimum year shown in the dropdowns when
-showDropdowns is set to TRUE}
-
-\item{maxYear}{(numeric) The maximum year shown in the dropdowns when
-showDropdowns is set to TRUE}
+\item{max}{(Date or string) The latest date a user may select.}
 
 \item{ranges}{(List) Set predefined date ranges the user can select from.
 Each key is the label for the range, and its value an array with two dates
 representing the bounds of the range. Click ranges in the configuration
 generator for examples.}
 
-\item{showCustomRangeLabel}{(boolean) Displays "Custom Range" at the end of
-the list of predefined ranges, when the ranges option is used. This option
-will be highlighted whenever the current date range selection does not
-match one of the predefined ranges. Clicking it will display the calendars
-to select a new range.}
+\item{language}{(string) The language used for month and day names. Default
+is "en". See the \href{https://momentjs.com/}{Multipe Locale Support} for a
+list of other valid values.}
 
-\item{opens}{('left'/'right'/'center') Whether the picker appears aligned to
-the left, to the right, or centered under the HTML element it's attached
-to.}
+\item{style}{(string) Add CSS-styles to the input.}
 
-\item{drops}{('down'/'up') Whether the picker appears below (default) or
-above the HTML element it's attached to.}
+\item{class}{(string) Custom class}
 
-\item{timePicker}{(boolean) Adds select boxes to choose times in addition to
-dates.}
+\item{icon}{(shiny.tag) Icon to display next to the label.}
 
-\item{timePickerIncrement}{(numeric) Increment of the minutes selection list
-for times (i.e. 30 to allow only selection of times ending in 0 or 30).}
+\item{options}{(List) List of further options. See
+\code{\link{daterangepickerOptions}}}
 
-\item{timePicker24Hour}{(boolean) Use 24-hour instead of 12-hour times,
-removing the AM/PM selection.}
-
-\item{timePickerSeconds}{(boolean) Show seconds in the timePicker.}
-
-\item{showWeekNumbers}{(boolean) Show localized week numbers at the start of
-each week on the calendars.}
-
-\item{showISOWeekNumbers}{(boolean) Show ISO week numbers at the start of
-each week on the calendars.}
-
-\item{parentEl}{(string) jQuery selector of the parent element that the date
-range picker will be added to, if not provided this will be 'body'}
-
-\item{maxSpan}{(List) The maximum span between the selected start and end
-dates. Check off maxSpan in the configuration generator for an example of
-how to use this. You can provide any object the moment library would let
-you add to a date.}
-
-\item{alwaysShowCalendars}{(boolean) Normally, if you use the ranges option
-to specify pre-defined date ranges, calendars for choosing a custom date
-range are not shown until the user clicks "Custom Range". When this option
-is set to true, the calendars for choosing a custom date range are always
-shown instead.}
-
-\item{buttonClasses}{(string) CSS class names that will be added to both the
-apply and cancel buttons.}
-
-\item{applyButtonClasses}{(string) CSS class names that will be added only to
-the apply button.}
-
-\item{cancelButtonClasses}{(string) CSS class names that will be added only
-to the cancel button.}
-
-\item{locale}{(List) Allows you to provide localized strings for buttons and
-labels, customize the date format, and change the first day of week for the
-calendars. Check off locale in the configuration generator to see how to
-customize these options.}
-
-\item{singleDatePicker}{(boolean) Show only a single calendar to choose one
-date, instead of a range picker with two calendars. The start and end dates
-provided to your callback will be the same single date chosen.}
-
-\item{autoApply}{(boolean) Hide the apply and cancel buttons, and
-automatically apply a new date range as soon as two dates are clicked.}
-
-\item{linkedCalendars}{(boolean) When enabled, the two calendars displayed
-will always be for two sequential months (i.e. January and February), and
-both will be advanced when clicking the left or right arrows above the
-calendars. When disabled, the two calendars can be individually advanced
-and display any month/year.}
-
-\item{isInvalidDate}{(function) A function that is passed each date in the
-two calendars before they are displayed, and may return true or false to
-indicate whether that date should be available for selection or not.}
-
-\item{isCustomDate}{(function) A function that is passed each date in the two
-calendars before they are displayed, and may return a string or array of
-CSS class names to apply to that date's calendar cell.}
-
-\item{autoUpdateInput}{(boolean) Indicates whether the date range picker
-should automatically update the value of the <input> element it's attached
-to at initialization and when the selected dates change.}
+\item{initCallback}{(function) A JS function}
 }
 \description{
 Date Range Picker can be attached to any webpage element to pop up two

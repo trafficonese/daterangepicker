@@ -2,8 +2,7 @@
 % Please edit documentation in R/daterangepicker.R
 \name{updateDaterangepicker}
 \alias{updateDaterangepicker}
-\title{updateDaterangepicker
-Change the start and end values of a daterangepicker on the client}
+\title{updateDaterangepicker}
 \usage{
 updateDaterangepicker(
   session,
@@ -11,9 +10,10 @@ updateDaterangepicker(
   label = NULL,
   start = NULL,
   end = NULL,
-  minYear = NULL,
-  maxYear = NULL,
-  icon = NULL
+  min = NULL,
+  max = NULL,
+  icon = NULL,
+  options = NULL
 )
 }
 \arguments{
@@ -23,15 +23,21 @@ updateDaterangepicker(
 
 \item{label}{The label to set for the input object.}
 
-\item{start}{The start date. Either a Date object, or a string in yyyy-mm-dd format.}
+\item{start}{The start date. Either a Date object, or a string in yyyy-mm-dd
+format.}
 
-\item{end}{The end date. Either a Date object, or a string in yyyy-mm-dd format.}
+\item{end}{The end date. Either a Date object, or a string in yyyy-mm-dd
+format.}
 
-\item{minDate}{The minimum allowed date. Either a Date object, or a string in yyyy-mm-dd format.}
+\item{min}{(Date or string) The earliest date a user may select.}
 
-\item{maxDate}{The maximum allowed date. Either a Date object, or a string in yyyy-mm-dd format.}
+\item{max}{(Date or string) The latest date a user may select.}
+
+\item{icon}{(shiny.tag) Icon to display next to the label.}
+
+\item{options}{(List) List of further options. See
+\code{\link{daterangepickerOptions}}}
 }
 \description{
-updateDaterangepicker
 Change the start and end values of a daterangepicker on the client
 }

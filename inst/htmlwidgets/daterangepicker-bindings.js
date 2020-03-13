@@ -2,23 +2,29 @@ var DateRangePickerBinding = new Shiny.InputBinding();
 
 $.extend(DateRangePickerBinding, {
   find: function(scope) {
-    console.log("find");console.log($(scope).find(".daterangepickerclass"));
+    //console.log("find");console.log($(scope).find(".daterangepickerclass"));
     return $(scope).find(".daterangepickerclass");
   },
   initialize: function initialize(el) {
     console.log("initiliaze"); console.log(el);
 
+    // Get callback function
     function cb(start, end) {
       console.log("cb is run.");
       console.log("start: " + start);
       console.log("end: " + end);
       $('#add_date_here span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
     }
+
+    // Parse options
     var options = JSON.parse(el.attributes.options.value);
     console.log("options"); console.log(options);
+    console.log("options.initCallback"); console.log(options.initCallback);
+    console.log("typeof options.initCallback"); console.log(typeof options.initCallback);
     debugger;
+
+    // Change Moment Locale globally
     if (options.language !== undefined && options.language !== undefined) {
-      console.log("Language set. Change the locale of moment globally");
       moment.locale(options.language);
     }
 
@@ -110,8 +116,6 @@ $.extend(DateRangePickerBinding, {
   },
   subscribe: function(el, callback) {
     console.log("subscribe");
-    //console.log("el"); console.log(el)
-    //console.log("callback"); console.log(callback)
 
     $(el).on("show.DateRangePickerBinding", function(event) {
       console.log("subscribe - show");
@@ -161,14 +165,6 @@ $.extend(DateRangePickerBinding, {
   if (data.hasOwnProperty("end")) {
     pickerdata.setEndDate(moment(data.end));
   }
-  // Update minYear
-  if (data.hasOwnProperty("minYear")) {
-    pickerdata.minYear = data.minYear;
-  }
-  // Update maxYear
-  if (data.hasOwnProperty("maxYear")) {
-    pickerdata.maxYear = data.maxYear;
-  }
   // Update Icon
   if (data.hasOwnProperty("icon")) {
       $(el)
@@ -183,6 +179,95 @@ $.extend(DateRangePickerBinding, {
       .text(data.label);
   }
 
+  // Update options
+  if (data.hasOwnProperty("options")) {
+    // Update minYear
+    if (data.options.hasOwnProperty("minYear")) {
+      pickerdata.minYear = data.options.minYear;
+    }
+    // Update maxYear
+    if (data.options.hasOwnProperty("maxYear")) {
+      pickerdata.maxYear = data.options.maxYear;
+    }
+    // Update showDropdowns
+    if (data.options.hasOwnProperty("showDropdowns")) {
+      pickerdata.showDropdowns = data.options.showDropdowns;
+    }
+    // Update showCustomRangeLabel
+    if (data.options.hasOwnProperty("showCustomRangeLabel")) {
+      pickerdata.showCustomRangeLabel = data.options.showCustomRangeLabel;
+    }
+    // Update opens
+    if (data.options.hasOwnProperty("opens")) {
+      pickerdata.opens = data.options.opens;
+    }
+    // Update drops
+    if (data.options.hasOwnProperty("drops")) {
+      pickerdata.drops = data.options.drops;
+    }
+    // Update timePicker
+    if (data.options.hasOwnProperty("timePicker")) {
+      pickerdata.timePicker = data.options.timePicker;
+    }
+    // Update timePickerIncrement
+    if (data.options.hasOwnProperty("timePickerIncrement")) {
+      pickerdata.timePickerIncrement = data.options.timePickerIncrement;
+    }
+    // Update timePicker24Hour
+    if (data.options.hasOwnProperty("timePicker24Hour")) {
+      pickerdata.timePicker24Hour = data.options.timePicker24Hour;
+    }
+    // Update timePickerSeconds
+    if (data.options.hasOwnProperty("timePickerSeconds")) {
+      pickerdata.timePickerSeconds = data.options.timePickerSeconds;
+    }
+    // Update showWeekNumbers
+    if (data.options.hasOwnProperty("showWeekNumbers")) {
+      pickerdata.showWeekNumbers = data.options.showWeekNumbers;
+    }
+    // Update showISOWeekNumbers
+    if (data.options.hasOwnProperty("showISOWeekNumbers")) {
+      pickerdata.showISOWeekNumbers = data.options.showISOWeekNumbers;
+    }
+    // Update parentEl
+    if (data.options.hasOwnProperty("parentEl")) {
+      pickerdata.parentEl = data.options.parentEl;
+    }
+    // Update maxSpan
+    if (data.options.hasOwnProperty("maxSpan")) {
+      pickerdata.maxSpan = data.options.maxSpan;
+    }
+    // Update alwaysShowCalendars
+    if (data.options.hasOwnProperty("alwaysShowCalendars")) {
+      pickerdata.alwaysShowCalendars = data.options.alwaysShowCalendars;
+    }
+    // Update buttonClasses
+    if (data.options.hasOwnProperty("buttonClasses")) {
+      pickerdata.buttonClasses = data.options.buttonClasses;
+    }
+    // Update applyButtonClasses
+    if (data.options.hasOwnProperty("applyButtonClasses")) {
+      pickerdata.applyButtonClasses = data.options.applyButtonClasses;
+    }
+    // Update cancelButtonClasses
+    if (data.options.hasOwnProperty("cancelButtonClasses")) {
+      pickerdata.cancelButtonClasses = data.options.cancelButtonClasses;
+    }
+    // Update autoUpdateInput
+    if (data.options.hasOwnProperty("autoUpdateInput")) {
+      pickerdata.autoUpdateInput = data.options.autoUpdateInput;
+    }
+    // Update autoApply
+    if (data.options.hasOwnProperty("autoApply ")) {
+      pickerdata.autoApply  = data.options.autoApply ;
+    }
+    // Update linkedCalendars
+    if (data.options.hasOwnProperty("linkedCalendars ")) {
+      pickerdata.linkedCalendars  = data.options.linkedCalendars ;
+    }
+
+  }
+  // Missing locale / language /isInvalidDate / isCustomDate
 
   /*
   $(el).trigger("change");

@@ -13,48 +13,46 @@ test_that("daterangepicker", {
   expect_error(daterangepicker(inputId = "daterange", start = start))
 
   expect_error(daterangepicker(inputId = "daterange", start = start, end = end,
-                  maxSpan = "days"))
+                               options = daterangepickerOptions(maxSpan = "days")))
   expect_error(daterangepicker(inputId = "daterange", start = start, end = end,
-                  maxSpan = list("days1" = 8)))
+                               options = daterangepickerOptions(
+                                 maxSpan = list("days1" = 8))))
   ################################
 
   x <- daterangepicker(inputId = "daterange", label = NULL,
-                       start = start, end = end,
-                       maxSpan = list("days" = c(1)))
+                       start = start, end = end)
   expect_is(x, "shiny.tag")
   expect_null(unlist(x$children[1:2]))
 
   x <- daterangepicker(inputId = "daterange",
-                       start = start, end = end,
-                       maxSpan = list("days" = c(1)))
+                       start = start, end = end)
   expect_is(x, "shiny.tag")
   expect_null(x$children[[2]])
 
   x <- daterangepicker(inputId = "daterange",
                        icon = shiny::icon("calendar"),
-                       start = start, end = end,
-                       maxSpan = list("days" = c(1)))
+                       start = start, end = end)
   expect_is(x, "shiny.tag")
   expect_false(is.null(x$children[[2]]))
-
+  expect_type(x$children[[2]], "list")
 
   x <- daterangepicker(inputId = "daterange",
                        icon = shiny::icon("calendar"),
                        start = start, end = end,
-                       maxDate = Sys.Date())
+                       max = Sys.Date())
   expect_is(x, "shiny.tag")
 
   x <- daterangepicker(inputId = "daterange",
                        icon = shiny::icon("calendar"),
                        start = start, end = end,
-                       minDate = Sys.Date() - 10)
+                       min = Sys.Date() - 10)
   expect_is(x, "shiny.tag")
 
   x <- daterangepicker(inputId = "daterange",
                        icon = shiny::icon("calendar"),
                        start = start, end = end,
-                       minDate = Sys.Date() - 10,
-                       maxDate = Sys.Date())
+                       min = Sys.Date() - 10,
+                       max = Sys.Date())
   expect_is(x, "shiny.tag")
 
   ## Ranges
@@ -69,6 +67,7 @@ test_that("daterangepicker", {
                        ))
   expect_is(x, "shiny.tag")
 
+  ## TODO - that should create an error. Check for Dates/POSIX in Ranges.
   # x <- daterangepicker(inputId = "daterange",
   #                      icon = shiny::icon("calendar"),
   #                      start = start, end = end,
