@@ -1,0 +1,23 @@
+Package: daterangepicker
+Type: Package
+Title: Create a Daterange Shiny Input
+Version: 0.1.0
+Authors@R: c(
+    person("Sebastian","Gatscha", email = "sebastian_gatscha@gmx.at", role = c("aut", "cre"))
+    )
+Maintainer: Sebastian Gatscha <sebastian_gatscha@gmx.at>
+Description: A Shiny Input for Date ranges, which can be attached to any webpage element to pop up two calendars for selecting dates, times, or predefined ranges like "Last 30 Days". It wraps the JavaScript library `daterangepicker` which is available under <https://www.daterangepicker.com>.
+License: MIT + file LICENSE
+Depends:
+  R (>= 3.2.0)
+Imports:
+  htmltools,
+  jsonify,
+  shiny
+URL: https://github.com/trafficonese/daterangepicker/, https://www.daterangepicker.com
+BugReports: https://github.com/trafficonese/daterangepicker/issues
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.2
+Suggests: 
+    testthat (>= 2.1.0)
