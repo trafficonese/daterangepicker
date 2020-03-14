@@ -32,6 +32,7 @@
 #' \href{https://www.daterangepicker.com/#config}{www.daterangepicker.com}
 #'
 #' @export
+#' @family daterangepicker
 #' @examples if (interactive()) {
 #' library(shiny)
 #' library(daterangepicker)
@@ -203,6 +204,7 @@ daterangepicker <- function(inputId = NULL,
 #' @seealso
 #' \href{https://www.daterangepicker.com/#config}{www.daterangepicker.com}
 #'
+#' @family daterangepicker
 #' @export
 daterangepickerOptions <- function(minYear = NULL, maxYear = NULL,
                                    showDropdowns = TRUE,
@@ -279,6 +281,7 @@ daterangepickerOptions <- function(minYear = NULL, maxYear = NULL,
 #' @param icon Icon to display next to the label.
 #' @param options List of further options. See
 #'   \code{\link{daterangepickerOptions}}
+#' @family daterangepicker
 #' @export
 updateDaterangepicker <- function(session, inputId, label = NULL,
                                   start = NULL, end = NULL,
