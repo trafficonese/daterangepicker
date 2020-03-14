@@ -41,3 +41,9 @@ format.}
 \description{
 Change the start and end values of a daterangepicker on the client
 }
+\seealso{
+Other daterangepicker: 
+\code{\link{daterangepickerOptions}()},
+\code{\link{daterangepicker}()}
+}
+\concept{daterangepicker}

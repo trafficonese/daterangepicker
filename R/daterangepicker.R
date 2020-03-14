@@ -204,7 +204,7 @@ daterangepicker <- function(inputId = NULL,
 #' @seealso
 #' \href{https://www.daterangepicker.com/#config}{www.daterangepicker.com}
 #'
-#' @family daterangepicker
+#' @family daterangepicker Functions
 #' @export
 daterangepickerOptions <- function(minYear = NULL, maxYear = NULL,
                                    showDropdowns = TRUE,

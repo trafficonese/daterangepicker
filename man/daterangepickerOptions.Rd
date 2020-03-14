@@ -127,4 +127,9 @@ Update the daterangepicker
 }
 \seealso{
 \href{https://www.daterangepicker.com/#config}{www.daterangepicker.com}
+
+Other daterangepicker: 
+\code{\link{daterangepicker}()},
+\code{\link{updateDaterangepicker}()}
 }
+\concept{daterangepicker}
