@@ -1,13 +1,16 @@
-<div align="center">
 # daterangepicker
-<img src="./man/figures/daterangepicker.PNG" height="20%"/>
-</div>
+
+<p align="center">
+  <img src="./man/figures/daterangepicker.PNG" align="right" width="250"/>
+</p>
 
 <!-- badges: start -->
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Travis build status](https://travis-ci.org/trafficonese/daterangepicker.svg?branch=master)](https://travis-ci.org/trafficonese/daterangepicker)
 [![Codecov test coverage](https://codecov.io/gh/trafficonese/daterangepicker/branch/master/graph/badge.svg)](https://codecov.io/gh/trafficonese/daterangepicker?branch=master)
 <!-- badges: end -->
+
+
 
 Custom Shiny input binding for a [Date Range Picker](https://www.daterangepicker.com/).
 
@@ -33,8 +36,6 @@ ui <- fluidPage(
     inputId = "daterange",
     label = "Pick a Date",
     start = Sys.Date() - 30, end = Sys.Date(),
-    max = Sys.Date(),
-    language = "en",
     style = "width:100%; border-radius:4px",
     class = "myclass",
     icon = icon("calendar")
