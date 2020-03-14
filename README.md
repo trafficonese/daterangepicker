@@ -57,3 +57,7 @@ shinyApp(ui, server)
 ```
 
 Further examples are in [/inst/examples/](https://github.com/trafficonese/daterangepicker/tree/master/inst/examples)
+
+## Further Information
+
+Check out the [Configuration Generator](https://www.daterangepicker.com/#config) for a Live-Demo of the different options. 
