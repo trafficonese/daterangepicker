@@ -33,95 +33,92 @@ daterangepickerOptions(
 )
 }
 \arguments{
-\item{minYear}{(numeric) The minimum year shown in the dropdowns when
-showDropdowns is set to TRUE}
+\item{minYear}{The minimum year as numeric shown in the dropdowns when
+showDropdowns is set to \code{TRUE}}
 
-\item{maxYear}{(numeric) The maximum year shown in the dropdowns when
-showDropdowns is set to TRUE}
+\item{maxYear}{The maximum year as numeric shown in the dropdowns when
+showDropdowns is set to \code{TRUE}}
 
-\item{showDropdowns}{(boolean) Show year and month select boxes above
-calendars to jump to a specific month and year.}
+\item{showDropdowns}{Show year and month select boxes above calendars to jump
+to a specific month and year.}
 
-\item{showCustomRangeLabel}{(boolean) Displays "Custom Range" at the end of
-the list of predefined ranges, when the ranges option is used. This option
-will be highlighted whenever the current date range selection does not
-match one of the predefined ranges. Clicking it will display the calendars
-to select a new range.}
+\item{showCustomRangeLabel}{Displays "Custom Range" at the end of the list of
+predefined ranges, when the ranges option is used. This option will be
+highlighted whenever the current date range selection does not match one of
+the predefined ranges. Clicking it will display the calendars to select a
+new range.}
 
-\item{opens}{('left'/'right'/'center') Whether the picker appears aligned to
-the left, to the right, or centered under the HTML element it's attached
+\item{opens}{Whether the picker appears aligned to the \code{left}, to the
+\code{right}, or to the \code{center} under the HTML element it's attached
 to.}
 
-\item{drops}{('down'/'up') Whether the picker appears below (default) or
-above the HTML element it's attached to.}
+\item{drops}{Whether the picker appears below (\code{down}) or
+above (\code{up}) the HTML element it's attached to. Default is \code{down}}
 
-\item{timePicker}{(boolean) Adds select boxes to choose times in addition to
-dates.}
+\item{timePicker}{Adds select boxes to choose times in addition to dates.}
 
-\item{timePickerIncrement}{(numeric) Increment of the minutes selection list
-for times (i.e. 30 to allow only selection of times ending in 0 or 30).}
+\item{timePickerIncrement}{Increment of the minutes selection list for times
+(i.e. 30 to allow only selection of times ending in 0 or 30).}
 
-\item{timePicker24Hour}{(boolean) Use 24-hour instead of 12-hour times,
-removing the AM/PM selection.}
+\item{timePicker24Hour}{Use 24-hour instead of 12-hour times, removing the
+AM/PM selection.}
 
-\item{timePickerSeconds}{(boolean) Show seconds in the timePicker.}
+\item{timePickerSeconds}{Show seconds in the timePicker.}
 
-\item{showWeekNumbers}{(boolean) Show localized week numbers at the start of
-each week on the calendars.}
+\item{showWeekNumbers}{Show localized week numbers at the start of each week
+on the calendars.}
 
-\item{showISOWeekNumbers}{(boolean) Show ISO week numbers at the start of
-each week on the calendars.}
+\item{showISOWeekNumbers}{Show ISO week numbers at the start of each week on
+the calendars.}
 
-\item{parentEl}{(string) jQuery selector of the parent element that the date
+\item{parentEl}{jQuery selector of the parent element that the date
 range picker will be added to, if not provided this will be 'body'}
 
-\item{maxSpan}{(List) The maximum span between the selected start and end
-dates. Check off maxSpan in the configuration generator for an example of
-how to use this. You can provide any object the moment library would let
-you add to a date.}
+\item{maxSpan}{The maximum span between the selected start and end dates as
+List or table. You can provide any object the moment library would let you
+add to a date.}
 
-\item{alwaysShowCalendars}{(boolean) Normally, if you use the ranges option
-to specify pre-defined date ranges, calendars for choosing a custom date
-range are not shown until the user clicks "Custom Range". When this option
-is set to true, the calendars for choosing a custom date range are always
+\item{alwaysShowCalendars}{Normally, if you use the ranges option to specify
+pre-defined date ranges, calendars for choosing a custom date range are not
+shown until the user clicks "Custom Range". When this option is set to
+\code{TRUE}, the calendars for choosing a custom date range are always
 shown instead.}
 
-\item{buttonClasses}{(string) CSS class names that will be added to both the
+\item{buttonClasses}{CSS class names that will be added to both the
 apply and cancel buttons.}
 
-\item{applyButtonClasses}{(string) CSS class names that will be added only to
+\item{applyButtonClasses}{CSS class names that will be added only to
 the apply button.}
 
-\item{cancelButtonClasses}{(string) CSS class names that will be added only
+\item{cancelButtonClasses}{CSS class names that will be added only
 to the cancel button.}
 
-\item{locale}{(List) Allows you to provide localized strings for buttons and
+\item{locale}{Allows you to provide localized strings for buttons and
 labels, customize the date format, and change the first day of week for the
-calendars. Check off locale in the configuration generator to see how to
-customize these options.}
+calendars.}
 
-\item{singleDatePicker}{(boolean) Show only a single calendar to choose one
+\item{singleDatePicker}{Show only a single calendar to choose one
 date, instead of a range picker with two calendars. The start and end dates
 provided to your callback will be the same single date chosen.}
 
-\item{autoApply}{(boolean) Hide the apply and cancel buttons, and
+\item{autoApply}{Hide the apply and cancel buttons, and
 automatically apply a new date range as soon as two dates are clicked.}
 
-\item{linkedCalendars}{(boolean) When enabled, the two calendars displayed
+\item{linkedCalendars}{When enabled, the two calendars displayed
 will always be for two sequential months (i.e. January and February), and
 both will be advanced when clicking the left or right arrows above the
 calendars. When disabled, the two calendars can be individually advanced
 and display any month/year.}
 
-\item{isInvalidDate}{(function) A JS-function that is passed each date in the
+\item{isInvalidDate}{A JS-function that is passed each date in the
 two calendars before they are displayed, and may return true or false to
 indicate whether that date should be available for selection or not.}
 
-\item{isCustomDate}{(function) A JS-function that is passed each date in the two
-calendars before they are displayed, and may return a string or array of
-CSS class names to apply to that date's calendar cell.}
+\item{isCustomDate}{A JS-function that is passed each date in the
+two calendars before they are displayed, and may return a string or array
+of CSS class names to apply to that date's calendar cell.}
 
-\item{autoUpdateInput}{(boolean) Indicates whether the date range picker
+\item{autoUpdateInput}{Indicates whether the date range picker
 should automatically update the value of the <input> element it's attached
 to at initialization and when the selected dates change.}
 }

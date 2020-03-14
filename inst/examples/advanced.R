@@ -8,8 +8,9 @@ start <- end - 30
 ## UI ##########################
 ui <- fluidPage(
   tags$head(tags$style(".myclass {
-                        /*margin: 50px 0 0 507px;*/
+                        margin-left: 400px;
                         background-color: #96dafb;}")),
+  br(),br(),
   daterangepicker(
     inputId = "daterange",
     label = "Pick a Date",
@@ -21,23 +22,18 @@ ui <- fluidPage(
                   "Last 7 days" = c(Sys.Date() - 6, Sys.Date()),
                   "Last 45 days" = c(Sys.Date() - 44, Sys.Date())
     ),
-    language = "de",
+    language = "en",
     style = "width:100%; border-radius:4px",
     class = "myclass",
     icon = icon("calendar"),
     options = daterangepickerOptions(
       minYear = 1990, maxYear = 2020,
-      # parentEl = ".add_date_here", ### Not working ???
-      opens = "left",
+      opens = "center",
       drops = "down",
       showDropdowns = T,
       maxSpan = list("years" = 1),
       autoUpdateInput = TRUE,
       linkedCalendars = FALSE,
-      timePicker = TRUE,
-      timePickerIncrement = 0,
-      timePicker24Hour = TRUE,
-      timePickerSeconds = TRUE,
       showWeekNumbers = TRUE,
       singleDatePicker = FALSE,
       locale = list(
@@ -60,15 +56,19 @@ ui <- fluidPage(
       showCustomRangeLabel = TRUE,
       cancelButtonClasses = "btn-danger"
     ),
-    initCallback = htmlwidgets::JS('function(start, end) {
-                    console.log("CUSTOM JS is run.");
-                    console.log("start: " + start);
-                    console.log("end: " + end);
-                    $("#add_date_here span").html(start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY"));
-                  }')
+    initCallback = htmlwidgets::JS('function(start, end, ranges) {
+                                   $("#add_date_here span")
+                                      .html("You picked: " +
+                                            start.format("MMMM D, YYYY") + " - " +
+                                            end.format("MMMM D, YYYY") + "<br>" +
+                                            "From the range: " + ranges)
+                                   }')
   ),
-  verbatimTextOutput("print"),
-  actionButton("act", "Update Daterangepicker")
+  # verbatimTextOutput("print"),
+  actionButton("act", "Update Daterangepicker"),
+  actionButton("act1", "Update Daterangepicker1"),
+  ## The callback will add the selected range in the span of #add_date_here
+  div(id = "add_date_here", span())
 )
 
 ## SERVER ##########################
@@ -78,16 +78,32 @@ server <- function(input, output, session) {
     input$daterange
   })
   observeEvent(input$act, {
-    updateDaterangepicker(session, "daterange", label = "new Label",
+    updateDaterangepicker(session, "daterange", label = "New Label",
                           start = Sys.Date() - 60, end = Sys.Date() - 30,
-                          icon = icon("calendar-check"),
+                          icon = icon("car"),
                           options = list(
-                            minYear = 2019, maxYear = 2022,
+                            minYear = 2000, maxYear = 2025,
                             showDropdowns = FALSE,
                             opens = "left",
-                            showCustomRangeLabel = TRUE,
+                            showCustomRangeLabel = FALSE,
                             alwaysShowCalendars = FALSE
                           ))
+  })
+  observeEvent(input$act1, {
+    updateDaterangepicker(session, "daterange",
+                          start = Sys.Date(),
+                          end = Sys.Date() - 100,
+                          max = end + (365 * 3),
+                          min = end - 365,
+                          label = "Another new Label",
+                          icon = icon("calendar-check"),
+                          options = list(
+                            showDropdowns = TRUE,
+                            opens = "right",
+                            alwaysShowCalendars = TRUE,
+                            showCustomRangeLabel = TRUE
+                          )
+    )
   })
 }
 

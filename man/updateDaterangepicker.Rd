@@ -29,13 +29,13 @@ format.}
 \item{end}{The end date. Either a Date object, or a string in yyyy-mm-dd
 format.}
 
-\item{min}{(Date or string) The earliest date a user may select.}
+\item{min}{The earliest date a user may select.}
 
-\item{max}{(Date or string) The latest date a user may select.}
+\item{max}{The latest date a user may select.}
 
-\item{icon}{(shiny.tag) Icon to display next to the label.}
+\item{icon}{Icon to display next to the label.}
 
-\item{options}{(List) List of further options. See
+\item{options}{List of further options. See
 \code{\link{daterangepickerOptions}}}
 }
 \description{

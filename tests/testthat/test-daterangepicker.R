@@ -8,15 +8,27 @@ start <- end - 30
 test_that("daterangepicker", {
 
   ## Errors ##############################
+  ## No inputID
   expect_error(daterangepicker())
+  ## No start/end-Date
   expect_error(daterangepicker(inputId = "daterange"))
   expect_error(daterangepicker(inputId = "daterange", start = start))
-
+  expect_error(daterangepicker(inputId = "daterange", end = end))
+  ## Wrong maxSpan
   expect_error(daterangepicker(inputId = "daterange", start = start, end = end,
                                options = daterangepickerOptions(maxSpan = "days")))
+  ## Wrong maxSpan
   expect_error(daterangepicker(inputId = "daterange", start = start, end = end,
                                options = daterangepickerOptions(
                                  maxSpan = list("days1" = 8))))
+  ## Wrong Ranges
+  x <- expect_error(daterangepicker(inputId = "daterange",
+                       icon = shiny::icon("calendar"),
+                       start = start, end = end,
+                       ranges = list("Gestern" = 12,
+                                     "Heute" = "a",
+                                     "Letzten 45 Tage" = list(1213))))
+
   ################################
 
   x <- daterangepicker(inputId = "daterange", label = NULL,
@@ -67,15 +79,12 @@ test_that("daterangepicker", {
                        ))
   expect_is(x, "shiny.tag")
 
-  ## TODO - that should create an error. Check for Dates/POSIX in Ranges.
-  # x <- daterangepicker(inputId = "daterange",
-  #                      icon = shiny::icon("calendar"),
-  #                      start = start, end = end,
-  #                      ranges = list("Gestern" = 12,
-  #                                    "Heute" = "a",
-  #                                    "Letzten 45 Tage" = list(1213)
-  #                      ))
-  # expect_is(x, "shiny.tag")
-
+  x <- daterangepicker(inputId = "daterange",
+                       start = start, end = end,
+                       ranges = data.frame("Gestern" = Sys.Date() - 1,
+                                           "Heute" = Sys.Date(),
+                                           "Letzten 45 Tage" = c(Sys.Date() - 44, Sys.Date())
+                       ))
+  expect_is(x, "shiny.tag")
 
 })

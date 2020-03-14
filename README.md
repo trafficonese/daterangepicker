@@ -1,4 +1,7 @@
+<div align="center">
 # daterangepicker
+<img src="./man/figures/daterangepicker.PNG" height="20%"/>
+</div>
 
 <!-- badges: start -->
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
@@ -11,12 +14,13 @@ Custom Shiny input binding for a [Date Range Picker](https://www.daterangepicker
 ## Installation
 
 ``` r
+# install.packages("remotes")
 remotes::install_github("trafficones/daterangepicker")
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+A basic example of a Date Range Picker:
 
 ``` r
 library(shiny)
@@ -24,14 +28,12 @@ library(daterangepicker)
 
 ## UI ##########################
 ui <- fluidPage(
-  tags$head(tags$style(".myclass {
-                        /*margin: 50px 0 0 507px;*/
-                        background-color: #96dafb;}")),
+  tags$head(tags$style(".myclass {background-color: #96dafb;}")),
   daterangepicker(
     inputId = "daterange",
     label = "Pick a Date",
     start = Sys.Date() - 30, end = Sys.Date(),
-    max = as.character(Sys.Date()),
+    max = Sys.Date(),
     language = "en",
     style = "width:100%; border-radius:4px",
     class = "myclass",
@@ -49,8 +51,8 @@ server <- function(input, output, session) {
   })
   observeEvent(input$act, {
     updateDaterangepicker(session, "daterange",
-                          start = as.Date(Sys.Date()), 
-                          end = as.Date(Sys.Date())-100)
+                          start = Sys.Date(), 
+                          end = Sys.Date() - 100)
   })
 }
 

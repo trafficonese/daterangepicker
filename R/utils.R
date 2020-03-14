@@ -5,6 +5,21 @@ filterEMPTY <- function(x) {
   x[!lengths(x) == 0]
 }
 
+#' checkRanges
+#' Check the ranges element, for Date objects
+#' @param ranges The list of ranges
+checkRanges <- function(ranges) {
+  cls <- lapply(ranges, class)
+  if (!all(unlist(cls) %in% c("Date","POSIXct","POSIXt","POSIXlt", "numeric"))) {
+    stop("All elements of `ranges` must be of class:\n",
+         "`Date`, `POSIXct`, `POSIXlt`, `POSIXt` or `numeric`.")
+  } else {
+    ranges <- lapply(ranges, as.Date, origin = "1970-01-01")
+    ranges <- lapply(ranges, as.character)
+  }
+  ranges
+}
+
 #' makeInput
 #' Make the input div-tag
 #' @param label The label of the daterangepicker

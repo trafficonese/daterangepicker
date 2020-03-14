@@ -2,26 +2,24 @@ library(shiny)
 library(daterangepicker)
 
 end <- Sys.Date()
+# end <- Sys.time()
 start <- end - 30
 
 ## UI ##########################
 ui <- fluidPage(
-  tags$head(tags$style(".myclass {
-                        /*margin: 50px 0 0 507px;*/
-                        background-color: #96dafb;}")),
   daterangepicker(
     inputId = "daterange",
     label = "Pick a Date",
     start = start, end = end,
-    max = end,
-    language = "en",
-    style = "width:100%; border-radius:4px",
-    class = "myclass",
-    icon = icon("calendar")
+    # max = end,
+    style = "width:100%; border-radius:4px"
+    ,ranges = data.frame(
+      "Today" = Sys.Date(),
+      "Yesterday" = Sys.Date() - 1,
+      "Last 3 Days" = c(Sys.Date() - 2, Sys.Date()))
   ),
   verbatimTextOutput("print"),
-  actionButton("act", "Update Daterangepicker"),
-  actionButton("act1", "Update Daterangepicker1")
+  actionButton("act", "Update Daterangepicker")
 )
 
 ## SERVER ##########################
@@ -39,14 +37,9 @@ server <- function(input, output, session) {
                             minYear = 2019, maxYear = 2022,
                             showDropdowns = FALSE,
                             opens = "left",
-                            showCustomRangeLabel = TRUE,
+                            showCustomRangeLabel = FALSE,
                             alwaysShowCalendars = FALSE
                           ))
-  })
-  observeEvent(input$act1, {
-    updateDaterangepicker(session, "daterange",
-                          start = Sys.Date(),
-                          end = Sys.Date() - 100)
   })
 }
 

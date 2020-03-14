@@ -21,45 +21,79 @@ daterangepicker(
 )
 }
 \arguments{
-\item{inputId}{(string) The input ID}
+\item{inputId}{The input ID}
 
-\item{label}{(string) The label for the control, or NULL for no label.}
+\item{label}{The label for the control, or NULL for no label.}
 
-\item{start}{(Date or string) The beginning date of the initially selected
-date range. If you provide a string, it must match the date format string
-set in your locale setting.}
+\item{start}{The beginning date of the initially selected. Must be a Date or
+string.}
 
-\item{end}{(Date or string) The end date of the initially selected date
-range.}
+\item{end}{The end date of the initially selected date range. Must be a Date
+or string}
 
-\item{min}{(Date or string) The earliest date a user may select.}
+\item{min}{The earliest date a user may select. Must be a Date or string}
 
-\item{max}{(Date or string) The latest date a user may select.}
+\item{max}{The latest date a user may select. Must be a Date or string}
 
-\item{ranges}{(List) Set predefined date ranges the user can select from.
-Each key is the label for the range, and its value an array with two dates
-representing the bounds of the range. Click ranges in the configuration
-generator for examples.}
+\item{ranges}{Set predefined date ranges the user can select from. Each key
+is the label for the range, and its value an array with two dates
+representing the bounds of the range.}
 
-\item{language}{(string) The language used for month and day names. Default
-is "en". See the \href{https://momentjs.com/}{Multipe Locale Support} for a
-list of other valid values.}
+\item{language}{The language used for month and day names. Default is "en".
+See the \href{https://momentjs.com/}{Multipe Locale Support} for a list of
+other valid values.}
 
-\item{style}{(string) Add CSS-styles to the input.}
+\item{style}{Add CSS-styles to the input.}
 
-\item{class}{(string) Custom class}
+\item{class}{Custom class}
 
-\item{icon}{(shiny.tag) Icon to display next to the label.}
+\item{icon}{Icon to display next to the label.}
 
-\item{options}{(List) List of further options. See
+\item{options}{List of further options. See
 \code{\link{daterangepickerOptions}}}
 
-\item{initCallback}{(function) A JS function}
+\item{initCallback}{A \code{\link[htmlwidgets]{JS}} function}
 }
 \description{
-Date Range Picker can be attached to any webpage element to pop up two
-calendars for selecting dates, times, or predefined ranges like "Last 30
-Days"
+Date Range Picker pop up two calendars for selecting dates, times, or
+predefined ranges like "Last 30 Days".
+}
+\examples{
+if (interactive()) {
+library(shiny)
+library(daterangepicker)
+
+## UI ##########################
+ui <- fluidPage(
+  tags$head(tags$style(".myclass {background-color: #96dafb;}")),
+  daterangepicker(
+    inputId = "daterange",
+    label = "Pick a Date",
+    start = Sys.Date() - 30, end = Sys.Date(),
+    max = Sys.Date(),
+    language = "en",
+    style = "width:100\%; border-radius:4px",
+    class = "myclass",
+    icon = icon("calendar")
+  ),
+  verbatimTextOutput("print"),
+  actionButton("act", "Update Daterangepicker"),
+)
+
+## SERVER ##########################
+server <- function(input, output, session) {
+  output$print <- renderPrint({
+    req(input$daterange)
+    input$daterange
+  })
+  observeEvent(input$act, {
+    updateDaterangepicker(session, "daterange",
+                          start = Sys.Date(),
+                          end = Sys.Date() - 100)
+  })
+}
+shinyApp(ui, server)
+}
 }
 \seealso{
 \href{https://www.daterangepicker.com/#config}{www.daterangepicker.com}
