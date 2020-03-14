@@ -128,8 +128,8 @@ Update the daterangepicker
 \seealso{
 \href{https://www.daterangepicker.com/#config}{www.daterangepicker.com}
 
-Other daterangepicker: 
+Other daterangepicker Functions: 
 \code{\link{daterangepicker}()},
 \code{\link{updateDaterangepicker}()}
 }
-\concept{daterangepicker}
+\concept{daterangepicker Functions}

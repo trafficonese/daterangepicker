@@ -98,8 +98,8 @@ shinyApp(ui, server)
 \seealso{
 \href{https://www.daterangepicker.com/#config}{www.daterangepicker.com}
 
-Other daterangepicker: 
+Other daterangepicker Functions: 
 \code{\link{daterangepickerOptions}()},
 \code{\link{updateDaterangepicker}()}
 }
-\concept{daterangepicker}
+\concept{daterangepicker Functions}
