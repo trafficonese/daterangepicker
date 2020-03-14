@@ -2,7 +2,6 @@ library(shiny)
 library(daterangepicker)
 
 end <- Sys.Date()
-# end <- Sys.time()
 start <- end - 30
 
 ## UI ##########################

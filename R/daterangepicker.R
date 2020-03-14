@@ -293,7 +293,17 @@ updateDaterangepicker <- function(session, inputId, label = NULL,
                                   min = NULL, max = NULL,
                                   icon = NULL, options = NULL) {
 
-  # if (!is.null(icon)) icon$htmldeps <- htmltools::htmlDependencies(icon)
+  ## If no icon was passed initially, we need to create a WebDependency-list
+  ## On the JS-side `Shiny.renderDependencies` adds the deps to the header
+  if (!is.null(icon)) {
+    icon$htmldeps <- list(shiny::createWebDependency(
+      htmltools::resolveDependencies(
+        htmltools::findDependencies(
+          icon
+        )
+      )[[1]]
+    ))
+  }
 
   message <- filterEMPTY(list(
     id = session$ns(inputId),

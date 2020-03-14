@@ -1,7 +1,4 @@
 var DateRangePickerBinding = new Shiny.InputBinding();
-
-var funcs = {};
-
 $.extend(DateRangePickerBinding, {
   find: function(scope) {
     return $(scope).find(".daterangepickerclass");
@@ -159,9 +156,8 @@ $.extend(DateRangePickerBinding, {
         // If there is an icon already, change the class
         ico.className = data.icon.attribs.class;
       } else {
-        // If no icon was given, add it to the DOM.
-        // TODO ? - If Library-dep was not added before, it doesnt work!
-        //Shiny.renderDepencies(data.icon.htmldeps) ## href is undefined?
+        // If no icon was given, add it to the DOM. (Add the dependencie, if not loaded initially)
+        Shiny.renderDependencies(data.icon.htmldeps);
         $(el).before(' <i class="'+data.icon.attribs.class+'"></i>');
       }
     }

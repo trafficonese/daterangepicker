@@ -1,7 +1,7 @@
 # daterangepicker
 
 <p align="center">
-  <img src="./man/figures/daterangepicker.PNG" align="right" width="250"/>
+  <img src="./man/figures/daterangepicker.PNG" align="right" width="300"/>
 </p>
 
 <!-- badges: start -->
@@ -9,8 +9,6 @@
 [![Travis build status](https://travis-ci.org/trafficonese/daterangepicker.svg?branch=master)](https://travis-ci.org/trafficonese/daterangepicker)
 [![Codecov test coverage](https://codecov.io/gh/trafficonese/daterangepicker/branch/master/graph/badge.svg)](https://codecov.io/gh/trafficonese/daterangepicker?branch=master)
 <!-- badges: end -->
-
-
 
 Custom Shiny input binding for a [Date Range Picker](https://www.daterangepicker.com/).
 
@@ -31,13 +29,11 @@ library(daterangepicker)
 
 ## UI ##########################
 ui <- fluidPage(
-  tags$head(tags$style(".myclass {background-color: #96dafb;}")),
   daterangepicker(
     inputId = "daterange",
     label = "Pick a Date",
     start = Sys.Date() - 30, end = Sys.Date(),
     style = "width:100%; border-radius:4px",
-    class = "myclass",
     icon = icon("calendar")
   ),
   verbatimTextOutput("print"),
