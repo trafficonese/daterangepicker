@@ -154,16 +154,26 @@ $.extend(DateRangePickerBinding, {
     }
     // Update Icon
     if (data.hasOwnProperty("icon")) {
-        $(el)
-          .parent()
-          .find("i")[0].className = data.icon.attribs.class;
+      var ico = $(el).parent().find("i")[0];
+      if (ico !== undefined) {
+        // If there is an icon already, change the class
+        ico.className = data.icon.attribs.class;
+      } else {
+        // If no icon was given, add it to the DOM.
+        // TODO ? - If Library-dep was not added before, it doesnt work!
+        //Shiny.renderDepencies(data.icon.htmldeps) ## href is undefined?
+        $(el).before(' <i class="'+data.icon.attribs.class+'"></i>');
+      }
     }
     // Update Label
     if (data.hasOwnProperty("label")) {
-      $(el)
-        .parent()
-        .find('label[for="' + data.id + '"]')
-        .text(data.label);
+      var lbl = $(el).parent().find('label[for="' + data.id + '"]');
+      // Is a label already there? If yes, update it, otherwise create it
+      if (lbl.length !== 0) {
+        lbl.text(data.label);
+      } else {
+        $(el).before('<label class="control-label" for="'+el.id+'">'+data.label+'</label>');
+      }
     }
     // Update minDate
     if (data.hasOwnProperty("minDate")) {
@@ -267,5 +277,4 @@ $.extend(DateRangePickerBinding, {
   }
 });
 Shiny.inputBindings.register(DateRangePickerBinding);
-
 

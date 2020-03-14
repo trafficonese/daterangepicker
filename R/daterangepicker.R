@@ -292,6 +292,9 @@ updateDaterangepicker <- function(session, inputId, label = NULL,
                                   start = NULL, end = NULL,
                                   min = NULL, max = NULL,
                                   icon = NULL, options = NULL) {
+
+  # if (!is.null(icon)) icon$htmldeps <- htmltools::htmlDependencies(icon)
+
   message <- filterEMPTY(list(
     id = session$ns(inputId),
     label = label,

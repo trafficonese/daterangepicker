@@ -1,4 +1,6 @@
+#' Register an InputHandler
 #' @importFrom shiny registerInputHandler
+#' @noRd
 .onLoad <- function(...) {
   shiny::registerInputHandler("DateRangePickerBinding", function(data, ...) {
     if (is.null(data)) {
@@ -7,9 +9,9 @@
       ## Return POSIX or Date, depending on format
       if (data$format == "POSIX") {
         # res <- try(as.POSIXct(c(data$start, data$end)), silent = TRUE)
-        res <- try(format(as.POSIXct(c(data$start, data$end),
-                                     origin = "1970-01-01 00:00:00"),
-                          "%Y-%m-%d %H:%M:%S"), silent = TRUE)
+        res <- try(as.POSIXct(c(data$start, data$end),
+                              origin = "1970-01-01 00:00:00"),
+                   silent = TRUE)
       } else {
         res <- try(as.Date(c(data$start, data$end)), silent = TRUE)
       }
@@ -22,5 +24,3 @@
     }
   }, force = TRUE)
 }
-
-

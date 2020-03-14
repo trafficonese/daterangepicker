@@ -11,9 +11,8 @@ ui <- fluidPage(
     inputId = "daterange",
     label = "Pick a Date",
     start = start, end = end,
-    # max = end,
-    style = "width:100%; border-radius:4px"
-    ,ranges = data.frame(
+    icon = icon("calendar"),
+    ranges = data.frame(
       "Today" = Sys.Date(),
       "Yesterday" = Sys.Date() - 1,
       "Last 3 Days" = c(Sys.Date() - 2, Sys.Date()))
@@ -36,7 +35,7 @@ server <- function(input, output, session) {
                           options = list(
                             minYear = 2019, maxYear = 2022,
                             showDropdowns = FALSE,
-                            opens = "left",
+                            opens = "center",
                             showCustomRangeLabel = FALSE,
                             alwaysShowCalendars = FALSE
                           ))
