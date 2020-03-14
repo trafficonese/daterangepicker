@@ -55,8 +55,8 @@ other valid values.}
 \item{initCallback}{A \code{\link[htmlwidgets]{JS}} function}
 }
 \description{
-Date Range Picker pop up two calendars for selecting dates, times, or
-predefined ranges like "Last 30 Days".
+The Date Range Picker pops up two calendars for selecting dates, times, or
+predefined ranges like "Yesterday", "Last 30 Days", etc.
 }
 \examples{
 if (interactive()) {

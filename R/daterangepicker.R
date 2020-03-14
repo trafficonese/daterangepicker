@@ -1,7 +1,7 @@
 #' daterangepicker
 #'
-#' Date Range Picker pop up two calendars for selecting dates, times, or
-#' predefined ranges like "Last 30 Days".
+#' The Date Range Picker pops up two calendars for selecting dates, times, or
+#' predefined ranges like "Yesterday", "Last 30 Days", etc.
 #'
 #' @importFrom htmltools htmlDependencies<- htmlDependencies htmlDependency tags
 #'   tagList
@@ -101,13 +101,13 @@ daterangepicker <- function(inputId = NULL,
   ), options))
   #######################
 
-  ## Adapt time format, if not given in options$locale List ################
+  ## (NOT USED) Adapt time format, if not given in options$locale List ################
   # if (is.null(options$locale)) {
   #   format <- ifelse(nchar(end) > 10 &&
   #                    nchar(start) > 10, "DD-MM-Y HH:MM:SS", "DD-MM-Y")
   #   options$locale <- list("format" = format)
   # }
-
+  #######################
 
   ## Make Input Tag #######################
   x <- makeInput(label, inputId, class, icon, style, options)
@@ -230,15 +230,7 @@ daterangepickerOptions <- function(minYear = NULL, maxYear = NULL,
                                    autoUpdateInput = TRUE) {
 
   ## Check Inputs ###################
-  if (!is.null(maxSpan)) {
-    if (!is.list(maxSpan) && length(maxSpan) == 1)
-      stop("`maxSpan` must be a named list with a numeric value.")
-    choicesmaxspan <- c("milliseconds","seconds","minutes",
-                        "days","months","years")
-    if (!names(maxSpan) %in% choicesmaxspan)
-      stop("The valid names for `maxSpan` are:\n",
-           paste(choicesmaxspan, collapse = ", "))
-  }
+  if (!is.null(maxSpan)) checkMaxSpan(maxSpan)
   opens <- match.arg(opens)[1]
   drops <- match.arg(drops)[1]
 
