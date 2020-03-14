@@ -56,3 +56,4 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
+Further examples are in [/inst/examples/](https://github.com/trafficonese/daterangepicker/tree/master/inst/examples)

@@ -21,12 +21,12 @@ test_that("daterangepicker", {
                                options = daterangepickerOptions(
                                  maxSpan = list("days1" = 8))))
   ## Wrong Ranges
-  x <- expect_error(daterangepicker(inputId = "daterange",
-                       icon = shiny::icon("calendar"),
-                       start = start, end = end,
-                       ranges = list("Gestern" = 12,
-                                     "Heute" = "a",
-                                     "Letzten 45 Tage" = list(1213))))
+  expect_error(daterangepicker(inputId = "daterange",
+                               icon = shiny::icon("calendar"),
+                               start = start, end = end,
+                               ranges = list("Gestern" = 12,
+                                             "Heute" = "a",
+                                             "Letzten 45 Tage" = list(1213))))
 
 
   ## Daterangepicker ############################
@@ -104,8 +104,6 @@ test_that("daterangepicker", {
     }
   ))
 
-  start <- Sys.Date()
-  end <- Sys.Date() - 100
   updateDaterangepicker(session, "daterange", label = "NewLabel",
                         start = start, end = end)
   res <- session$lastInputMessage
@@ -113,25 +111,25 @@ test_that("daterangepicker", {
   expect_identical(res$message$label, "NewLabel")
   expect_identical(res$message$start, start)
   expect_identical(res$message$end, end)
+
   ## onLoad #######################
   expect_null(daterangepicker:::.onLoad()(NULL))
 
-  war <- list(start = "sysd - 10", end = sysd, format = "Date")
+  war <- list(start = "sysd - 10", end = end, format = "Date")
   x <- expect_warning(daterangepicker:::.onLoad()(war))
   expect_identical(x, war)
 
-  sysd <- Sys.Date()
-  data <- list(start = sysd - 10,
-               end = sysd,
+  data <- list(start = start - 10,
+               end = end,
                format = "Date")
   x <- daterangepicker:::.onLoad()(data)
-  expect_identical(x[1], sysd - 10)
-  expect_identical(x[2], sysd)
+  expect_identical(x[1], start - 10)
+  expect_identical(x[2], end)
 
-  data <- list(start = sysd - 10,
-               end = sysd,
+  data <- list(start = start - 10,
+               end = end,
                format = "POSIX")
   x <- daterangepicker:::.onLoad()(data)
-  expect_identical(x[1], as.POSIXct(sysd - 10))
-  expect_identical(x[2], as.POSIXct(sysd))
+  expect_identical(x[1], as.POSIXct(start - 10))
+  expect_identical(x[2], as.POSIXct(end))
 })
