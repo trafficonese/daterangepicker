@@ -2,7 +2,15 @@
 
 language: R
 cache: packages
+warnings_are_errors: true
 
+r:
+  - oldrel
+  - release
+  - devel
+
+r_packages:
+  - covr
 
 after_success:
   - Rscript -e 'covr::codecov()'
