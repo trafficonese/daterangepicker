@@ -112,6 +112,17 @@ test_that("daterangepicker", {
   expect_identical(res$message$start, start)
   expect_identical(res$message$end, end)
 
+  updateDaterangepicker(session, "daterange", label = "NewLabel",
+                        start = start, end = end, icon = icon("calendar"))
+  res <- invisible(session$lastInputMessage)
+  expect_identical(res$message$id, "daterange")
+  expect_identical(res$message$label, "NewLabel")
+  expect_identical(res$message$start, start)
+  expect_identical(res$message$end, end)
+  expect_is(res$message$icon, "shiny.tag")
+  expect_is(res$message$icon$htmldeps[[1]], "html_dependency")
+  expect_length(res$message$icon$htmldeps[[1]], 9)
+
   ## onLoad #######################
   expect_null(daterangepicker:::.onLoad()(NULL))
 
