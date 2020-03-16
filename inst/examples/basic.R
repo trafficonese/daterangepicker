@@ -17,8 +17,8 @@ ui <- fluidPage(
       "Last 3 Days" = c(Sys.Date() - 2, Sys.Date())),
     options = daterangepickerOptions(
       autoUpdateInput = FALSE,
-      cancelIsClear = TRUE
-      ,locale = list(
+      cancelIsClear = TRUE,
+      locale = list(
         format = "YYYY-MM-DD",
         cancelLabel = 'Clear'
       )

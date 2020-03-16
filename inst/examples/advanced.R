@@ -57,11 +57,9 @@ ui <- fluidPage(
       cancelButtonClasses = "btn-danger"
     )
   ),
-  # verbatimTextOutput("print"),
+  verbatimTextOutput("print"),
   actionButton("act", "Update Daterangepicker"),
-  actionButton("act1", "Update Daterangepicker1"),
-  ## The callback will add the selected range in the span of #add_date_here
-  div(id = "add_date_here", span())
+  actionButton("act1", "Update Daterangepicker1")
 )
 
 ## SERVER ##########################
