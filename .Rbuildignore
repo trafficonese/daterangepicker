@@ -8,3 +8,5 @@
 ^pkgdown$
 ^trials$
 ^appveyor\.yml$
+^CRAN-RELEASE$
+^cran-comments\.md$
