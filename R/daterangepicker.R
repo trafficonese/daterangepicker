@@ -19,7 +19,7 @@
 #'   is the label for the range, and its value an array with two dates
 #'   representing the bounds of the range.
 #' @param language The language used for month and day names. Default is "en".
-#'   See the \href{https://momentjs.com/}{Multipe Locale Support} for a list of
+#'   See the \href{https://momentjs.com/}{Multiple Locale Support} for a list of
 #'   other valid values.
 #' @param style Add CSS-styles to the input.
 #' @param class Custom class

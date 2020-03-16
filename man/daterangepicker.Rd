@@ -39,7 +39,7 @@ is the label for the range, and its value an array with two dates
 representing the bounds of the range.}
 
 \item{language}{The language used for month and day names. Default is "en".
-See the \href{https://momentjs.com/}{Multipe Locale Support} for a list of
+See the \href{https://momentjs.com/}{Multiple Locale Support} for a list of
 other valid values.}
 
 \item{style}{Add CSS-styles to the input.}
