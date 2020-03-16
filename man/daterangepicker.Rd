@@ -16,8 +16,7 @@ daterangepicker(
   style = "width:100\%;border-radius:4px;text-align:center;",
   class = NULL,
   icon = NULL,
-  options = daterangepickerOptions(),
-  initCallback = NULL
+  options = daterangepickerOptions()
 )
 }
 \arguments{
@@ -25,11 +24,11 @@ daterangepicker(
 
 \item{label}{The label for the control, or NULL for no label.}
 
-\item{start}{The beginning date of the initially selected. Must be a Date or
-string.}
+\item{start}{The beginning date of the initially selected. Must be a Date /
+POSIXt or string. If NULL will default to the current day.}
 
 \item{end}{The end date of the initially selected date range. Must be a Date
-or string}
+/ POSIXt or string. If NULL will default to the current day.}
 
 \item{min}{The earliest date a user may select. Must be a Date or string}
 
@@ -51,8 +50,6 @@ other valid values.}
 
 \item{options}{List of further options. See
 \code{\link{daterangepickerOptions}}}
-
-\item{initCallback}{A \code{\link[htmlwidgets]{JS}} function}
 }
 \description{
 The Date Range Picker pops up two calendars for selecting dates, times, or
@@ -72,6 +69,11 @@ ui <- fluidPage(
     start = Sys.Date() - 30, end = Sys.Date(),
     max = Sys.Date(),
     language = "en",
+    ranges = list("Today" = Sys.Date(),
+                  "Yesterday" = Sys.Date() - 1,
+                  "Last 3 days" = c(Sys.Date() - 2, Sys.Date()),
+                  "Last 7 days" = c(Sys.Date() - 6, Sys.Date())
+    ),
     style = "width:100\%; border-radius:4px",
     class = "myclass",
     icon = icon("calendar")

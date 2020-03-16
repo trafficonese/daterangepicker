@@ -9,10 +9,6 @@ test_that("daterangepicker", {
   ## Errors ##############################
   ## No inputID
   expect_error(daterangepicker())
-  ## No start/end-Date
-  expect_error(daterangepicker(inputId = "daterange"))
-  expect_error(daterangepicker(inputId = "daterange", start = start))
-  expect_error(daterangepicker(inputId = "daterange", end = end))
   ## Wrong maxSpan
   expect_error(daterangepicker(inputId = "daterange", start = start, end = end,
                                options = daterangepickerOptions(maxSpan = "days")))
@@ -30,6 +26,24 @@ test_that("daterangepicker", {
 
 
   ## Daterangepicker ############################
+  x <- daterangepicker(inputId = "daterange")
+  expect_is(x, "shiny.tag")
+  expect_null(unlist(x$children[2]))
+  expect_length(object = htmltools::findDependencies(x), n = 1)
+  expect_true("daterangepicker" %in% unlist(lapply(htmltools::findDependencies(x), `[[`, "name")))
+
+  x <- daterangepicker(inputId = "daterange", start = start)
+  expect_is(x, "shiny.tag")
+  expect_null(unlist(x$children[2]))
+  expect_length(object = htmltools::findDependencies(x), n = 1)
+  expect_true("daterangepicker" %in% unlist(lapply(htmltools::findDependencies(x), `[[`, "name")))
+
+  x <- daterangepicker(inputId = "daterange", end = end)
+  expect_is(x, "shiny.tag")
+  expect_null(unlist(x$children[2]))
+  expect_length(object = htmltools::findDependencies(x), n = 1)
+  expect_true("daterangepicker" %in% unlist(lapply(htmltools::findDependencies(x), `[[`, "name")))
+
   x <- daterangepicker(inputId = "daterange", label = NULL,
                        start = start, end = end)
   expect_is(x, "shiny.tag")

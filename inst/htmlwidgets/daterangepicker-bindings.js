@@ -7,12 +7,6 @@ $.extend(DateRangePickerBinding, {
     // Parse options
     var options = JSON.parse(el.attributes.options.value);
 
-    // Initiliaze a callback function
-    var cb;
-    if (options.initCallback !== undefined && typeof options.initCallback === "string") {
-      cb = new Function('return ' + options.initCallback)();
-    }
-
     // Change Moment Locale globally
     if (options.language !== undefined && options.language !== null) {
       moment.locale(options.language);
@@ -35,8 +29,8 @@ $.extend(DateRangePickerBinding, {
     // Initialize daterangepicker
     $(el).daterangepicker({
       parentEl: options.parentEl ? options.parentEl : 'body',
-      startDate: moment(options.start),
-      endDate: moment(options.end),
+      startDate: options.start ? moment(options.start) : false,
+      endDate: options.end ? moment(options.end) : false,
       minDate: options.minDate ? moment(options.minDate) : false,
       maxDate: options.maxDate ? moment(options.maxDate) : false,
       maxSpan: options.maxSpan ? options.maxSpan : false,
@@ -69,7 +63,7 @@ $.extend(DateRangePickerBinding, {
       locale: options.locale ? options.locale : {format: 'Y-MM-DD'},
       isInvalidDate: options.isInvalidDate ? options.isInvalidDate : undefined,
       isCustomDate: options.isCustomDate ? options.isCustomDate : undefined,
-    }, cb);
+    });
   },
   getValue: function(el) {
     var res, start, end;
@@ -81,8 +75,8 @@ $.extend(DateRangePickerBinding, {
       // Make a Timestamp
       res = {
         format: "POSIX",
-        //start: start.format('YYYY-MM-DD HH:MM:SS'),
-        //end: end.format('YYYY-MM-DD HH:MM:SS')
+        //start: start.format('YYYY-MM-DD hh:mm:ss'),
+        //end: end.format('YYYY-MM-DD hh:mm:ss')
         start: start.unix(),
         end: end.unix()
       };
@@ -100,37 +94,31 @@ $.extend(DateRangePickerBinding, {
   getType: function(el) {
     return "DateRangePickerBinding";
   },
-  setValue: function(el, value) {
-    console.log("setValue");console.log(el);console.log(value);debugger;
-    //value = JSON.parse(value);
-  },
   subscribe: function(el, callback) {
-    $(el).on("show.DateRangePickerBinding", function(event) {
-      //console.log("subscribe - show");
+    $(el).on("show.daterangepicker", function(event) {
       callback();
     });
-    $(el).on("hide.DateRangePickerBinding", function(event) {
-      //console.log("subscribe - hide");
+    $(el).on("hide.daterangepicker", function(event) {
       callback();
     });
-    $(el).on("showCalendar.DateRangePickerBinding", function(event) {
-      //console.log("subscribe - showCalendar");
+    $(el).on("showCalendar.daterangepicker", function(event) {
       callback();
     });
-    $(el).on("hideCalendar.DateRangePickerBinding", function(event) {
-      //console.log("subscribe - hideCalendar");
+    $(el).on("hideCalendar.daterangepicker", function(event) {
       callback();
     });
-    $(el).on("apply.DateRangePickerBinding", function(event) {
-      //console.log("subscribe - apply");
+    $(el).on("apply.daterangepicker", function(event) {
       callback();
     });
-    $(el).on("cancel.DateRangePickerBinding", function(event) {
-      //console.log("subscribe - cancel");
-      callback();
+    $(el).on("cancel.daterangepicker", function(event) {
+      var opt = JSON.parse(this.attributes.options.nodeValue);
+      if (opt.cancelIsClear !== undefined && opt.cancelIsClear) {
+        $(this).val('');
+      } else {
+        callback();
+      }
     });
-    $(el).on("change.DateRangePickerBinding", function(event) {
-      //console.log("subscribe - change");
+    $(el).on("change.daterangepicker", function(event) {
       callback();
     });
   },
@@ -267,8 +255,8 @@ $.extend(DateRangePickerBinding, {
         pickerdata.linkedCalendars = data.options.linkedCalendars;
       }
 
-      $(el).trigger("apply");
-      $(el).trigger("change");
+      //$(el).trigger("apply");
+      //$(el).trigger("change");
     }
   }
 });

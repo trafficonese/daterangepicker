@@ -23,12 +23,11 @@ daterangepickerOptions(
   buttonClasses = NULL,
   applyButtonClasses = NULL,
   cancelButtonClasses = NULL,
+  cancelIsClear = FALSE,
   locale = NULL,
   singleDatePicker = FALSE,
   autoApply = FALSE,
   linkedCalendars = TRUE,
-  isInvalidDate = NULL,
-  isCustomDate = NULL,
   autoUpdateInput = TRUE
 )
 }
@@ -52,8 +51,8 @@ new range.}
 \code{right}, or to the \code{center} under the HTML element it's attached
 to.}
 
-\item{drops}{Whether the picker appears below (\code{down}) or
-above (\code{up}) the HTML element it's attached to. Default is \code{down}}
+\item{drops}{Whether the picker appears below (\code{down}) or above
+(\code{up}) the HTML element it's attached to. Default is \code{down}}
 
 \item{timePicker}{Adds select boxes to choose times in addition to dates.}
 
@@ -71,8 +70,8 @@ on the calendars.}
 \item{showISOWeekNumbers}{Show ISO week numbers at the start of each week on
 the calendars.}
 
-\item{parentEl}{jQuery selector of the parent element that the date
-range picker will be added to, if not provided this will be 'body'}
+\item{parentEl}{jQuery selector of the parent element that the date range
+picker will be added to, if not provided this will be 'body'}
 
 \item{maxSpan}{The maximum span between the selected start and end dates as
 List or table. You can provide any object the moment library would let you
@@ -84,43 +83,38 @@ shown until the user clicks "Custom Range". When this option is set to
 \code{TRUE}, the calendars for choosing a custom date range are always
 shown instead.}
 
-\item{buttonClasses}{CSS class names that will be added to both the
-apply and cancel buttons.}
+\item{buttonClasses}{CSS class names that will be added to both the apply and
+cancel buttons.}
 
-\item{applyButtonClasses}{CSS class names that will be added only to
-the apply button.}
+\item{applyButtonClasses}{CSS class names that will be added only to the
+apply button.}
 
-\item{cancelButtonClasses}{CSS class names that will be added only
-to the cancel button.}
+\item{cancelButtonClasses}{CSS class names that will be added only to the
+cancel button.}
 
-\item{locale}{Allows you to provide localized strings for buttons and
-labels, customize the date format, and change the first day of week for the
+\item{cancelIsClear}{If TRUE, will treat the Cancel Button like a Clear
+Button.}
+
+\item{locale}{Allows you to provide localized strings for buttons and labels,
+customize the date format, and change the first day of week for the
 calendars.}
 
-\item{singleDatePicker}{Show only a single calendar to choose one
-date, instead of a range picker with two calendars. The start and end dates
+\item{singleDatePicker}{Show only a single calendar to choose one date,
+instead of a range picker with two calendars. The start and end dates
 provided to your callback will be the same single date chosen.}
 
-\item{autoApply}{Hide the apply and cancel buttons, and
-automatically apply a new date range as soon as two dates are clicked.}
+\item{autoApply}{Hide the apply and cancel buttons, and automatically apply a
+new date range as soon as two dates are clicked.}
 
-\item{linkedCalendars}{When enabled, the two calendars displayed
-will always be for two sequential months (i.e. January and February), and
-both will be advanced when clicking the left or right arrows above the
-calendars. When disabled, the two calendars can be individually advanced
-and display any month/year.}
+\item{linkedCalendars}{When enabled, the two calendars displayed will always
+be for two sequential months (i.e. January and February), and both will be
+advanced when clicking the left or right arrows above the calendars. When
+disabled, the two calendars can be individually advanced and display any
+month/year.}
 
-\item{isInvalidDate}{A JS-function that is passed each date in the
-two calendars before they are displayed, and may return true or false to
-indicate whether that date should be available for selection or not.}
-
-\item{isCustomDate}{A JS-function that is passed each date in the
-two calendars before they are displayed, and may return a string or array
-of CSS class names to apply to that date's calendar cell.}
-
-\item{autoUpdateInput}{Indicates whether the date range picker
-should automatically update the value of the <input> element it's attached
-to at initialization and when the selected dates change.}
+\item{autoUpdateInput}{Indicates whether the date range picker should
+automatically update the value of the <input> element it's attached to at
+initialization and when the selected dates change.}
 }
 \description{
 Update the daterangepicker

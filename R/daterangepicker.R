@@ -9,10 +9,10 @@
 #'
 #' @param inputId The input ID
 #' @param label The label for the control, or NULL for no label.
-#' @param start The beginning date of the initially selected. Must be a Date or
-#'   string.
+#' @param start The beginning date of the initially selected. Must be a Date /
+#'   POSIXt or string. If NULL will default to the current day.
 #' @param end The end date of the initially selected date range. Must be a Date
-#'   or string
+#'   / POSIXt or string. If NULL will default to the current day.
 #' @param min The earliest date a user may select. Must be a Date or string
 #' @param max The latest date a user may select. Must be a Date or string
 #' @param ranges Set predefined date ranges the user can select from. Each key
@@ -26,7 +26,6 @@
 #' @param icon Icon to display next to the label.
 #' @param options List of further options. See
 #'   \code{\link{daterangepickerOptions}}
-#' @param initCallback A \code{\link[htmlwidgets]{JS}} function
 #'
 #' @seealso
 #' \href{https://www.daterangepicker.com/#config}{www.daterangepicker.com}
@@ -46,6 +45,11 @@
 #'     start = Sys.Date() - 30, end = Sys.Date(),
 #'     max = Sys.Date(),
 #'     language = "en",
+#'     ranges = list("Today" = Sys.Date(),
+#'                   "Yesterday" = Sys.Date() - 1,
+#'                   "Last 3 days" = c(Sys.Date() - 2, Sys.Date()),
+#'                   "Last 7 days" = c(Sys.Date() - 6, Sys.Date())
+#'     ),
 #'     style = "width:100%; border-radius:4px",
 #'     class = "myclass",
 #'     icon = icon("calendar")
@@ -77,28 +81,26 @@ daterangepicker <- function(inputId = NULL,
                             style = "width:100%;border-radius:4px;text-align:center;",
                             class = NULL,
                             icon = NULL,
-                            options = daterangepickerOptions(),
-                            initCallback = NULL
+                            options = daterangepickerOptions()
                             ) {
 
   ## Check Inputs #######################
   if (is.null(inputId)) stop("Daterangepicker needs an `inputId`")
-  if (is.null(start)) stop("Daterangepicker needs a `start`-Date")
-  if (is.null(end)) stop("Daterangepicker needs an `end`-Date")
-  if (!is.null(min)) min <- format(as.Date(min), "%Y/%m/%d")
-  if (!is.null(max)) max <- format(as.Date(max), "%Y/%m/%d")
+  if (!is.null(start)) start <- as.character(start)
+  if (!is.null(end)) end <- as.character(end)
+  if (!is.null(min)) min <- as.character(min)
+  if (!is.null(max)) max <- as.character(max)
   if (!is.null(ranges)) ranges <- checkRanges(ranges)
   #######################
 
   ## Fill + Filter options #######################
   options <- filterEMPTY(c(
     list(
-    start = as.character(as.Date(start)),
-    end = as.character(as.Date(end)),
+    start = start,
+    end = end,
     minDate = min, maxDate = max,
     ranges = ranges,
-    language = language,
-    initCallback = initCallback
+    language = language
   ), options))
   #######################
 
@@ -120,12 +122,12 @@ daterangepicker <- function(inputId = NULL,
     version = "1.0.0",
     src = system.file("htmlwidgets", package = "daterangepicker"),
     script = c(
-      # "moment.min.js",
-      "moment.locales.min.js",
-      "daterangepicker.min.js",
+      # "moment/moment.min.js",
+      "moment/moment.locales.min.js",
+      "daterangepicker/daterangepicker.min.js",
       "daterangepicker-bindings.js"
     ),
-    stylesheet = "daterangepicker.css"
+    stylesheet = "daterangepicker/daterangepicker.css"
   )
   #######################
   x
@@ -168,38 +170,34 @@ daterangepicker <- function(inputId = NULL,
 #' @param opens Whether the picker appears aligned to the \code{left}, to the
 #'   \code{right}, or to the \code{center} under the HTML element it's attached
 #'   to.
-#' @param drops Whether the picker appears below (\code{down}) or
-#'   above (\code{up}) the HTML element it's attached to. Default is \code{down}
-#' @param buttonClasses CSS class names that will be added to both the
-#'   apply and cancel buttons.
-#' @param applyButtonClasses CSS class names that will be added only to
-#'   the apply button.
-#' @param cancelButtonClasses CSS class names that will be added only
-#'   to the cancel button.
-#' @param locale Allows you to provide localized strings for buttons and
-#'   labels, customize the date format, and change the first day of week for the
+#' @param drops Whether the picker appears below (\code{down}) or above
+#'   (\code{up}) the HTML element it's attached to. Default is \code{down}
+#' @param buttonClasses CSS class names that will be added to both the apply and
+#'   cancel buttons.
+#' @param applyButtonClasses CSS class names that will be added only to the
+#'   apply button.
+#' @param cancelButtonClasses CSS class names that will be added only to the
+#'   cancel button.
+#' @param cancelIsClear If TRUE, will treat the Cancel Button like a Clear
+#'   Button.
+#' @param locale Allows you to provide localized strings for buttons and labels,
+#'   customize the date format, and change the first day of week for the
 #'   calendars.
-#' @param singleDatePicker Show only a single calendar to choose one
-#'   date, instead of a range picker with two calendars. The start and end dates
+#' @param singleDatePicker Show only a single calendar to choose one date,
+#'   instead of a range picker with two calendars. The start and end dates
 #'   provided to your callback will be the same single date chosen.
-#' @param autoApply Hide the apply and cancel buttons, and
-#'   automatically apply a new date range as soon as two dates are clicked.
-#' @param linkedCalendars When enabled, the two calendars displayed
-#'   will always be for two sequential months (i.e. January and February), and
-#'   both will be advanced when clicking the left or right arrows above the
-#'   calendars. When disabled, the two calendars can be individually advanced
-#'   and display any month/year.
-#' @param isInvalidDate A JS-function that is passed each date in the
-#'   two calendars before they are displayed, and may return true or false to
-#'   indicate whether that date should be available for selection or not.
-#' @param isCustomDate A JS-function that is passed each date in the
-#'   two calendars before they are displayed, and may return a string or array
-#'   of CSS class names to apply to that date's calendar cell.
-#' @param autoUpdateInput Indicates whether the date range picker
-#'   should automatically update the value of the <input> element it's attached
-#'   to at initialization and when the selected dates change.
-#' @param parentEl jQuery selector of the parent element that the date
-#'   range picker will be added to, if not provided this will be 'body'
+#' @param autoApply Hide the apply and cancel buttons, and automatically apply a
+#'   new date range as soon as two dates are clicked.
+#' @param linkedCalendars When enabled, the two calendars displayed will always
+#'   be for two sequential months (i.e. January and February), and both will be
+#'   advanced when clicking the left or right arrows above the calendars. When
+#'   disabled, the two calendars can be individually advanced and display any
+#'   month/year.
+#' @param autoUpdateInput Indicates whether the date range picker should
+#'   automatically update the value of the <input> element it's attached to at
+#'   initialization and when the selected dates change.
+#' @param parentEl jQuery selector of the parent element that the date range
+#'   picker will be added to, if not provided this will be 'body'
 #'
 #' @seealso
 #' \href{https://www.daterangepicker.com/#config}{www.daterangepicker.com}
@@ -223,12 +221,13 @@ daterangepickerOptions <- function(minYear = NULL, maxYear = NULL,
                                    buttonClasses = NULL,
                                    applyButtonClasses = NULL,
                                    cancelButtonClasses = NULL,
+                                   cancelIsClear = FALSE,
                                    locale = NULL,
                                    singleDatePicker = FALSE,
                                    autoApply = FALSE,
                                    linkedCalendars = TRUE,
-                                   isInvalidDate = NULL, ## JS
-                                   isCustomDate = NULL, ## JS
+                                   # isInvalidDate = NULL, ## JS
+                                   # isCustomDate = NULL, ## JS
                                    autoUpdateInput = TRUE) {
 
   ## Check Inputs ###################
@@ -254,16 +253,26 @@ daterangepickerOptions <- function(minYear = NULL, maxYear = NULL,
     buttonClasses = buttonClasses,
     applyButtonClasses = applyButtonClasses,
     cancelButtonClasses = cancelButtonClasses,
+    cancelIsClear = cancelIsClear,
     locale = locale,
     singleDatePicker = singleDatePicker,
     autoApply = autoApply,
     linkedCalendars = linkedCalendars,
-    isInvalidDate = isInvalidDate, ## JS
-    isCustomDate = isCustomDate, ## JS
+    # isInvalidDate = isInvalidDate, ## JS
+    # isCustomDate = isCustomDate, ## JS
     autoUpdateInput = autoUpdateInput,
     parentEl = parentEl
   ))
 }
+
+# param isInvalidDate A JS-function that is passed each date in the two
+#   calendars before they are displayed, and may return true or false to
+#   indicate whether that date should be available for selection or not.
+# param isCustomDate A JS-function that is passed each date in the two
+#   calendars before they are displayed, and may return a string or array of
+#   CSS class names to apply to that date's calendar cell.
+
+
 
 #' updateDaterangepicker
 #'
@@ -293,7 +302,7 @@ updateDaterangepicker <- function(session, inputId, label = NULL,
   if (!is.null(icon)) {
     icon$htmldeps <- list(shiny::createWebDependency(
       htmltools::resolveDependencies(
-        htmltools::findDependencies(
+        htmltools::htmlDependencies(
           icon
         )
       )[[1]]

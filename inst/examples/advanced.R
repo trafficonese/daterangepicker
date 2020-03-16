@@ -39,7 +39,7 @@ ui <- fluidPage(
       locale = list(
         direction = 'ltr',  ## or rtl
         separator = ' <-> ',
-        format = 'LL',      ## 'DD-MM-Y HH:MM:SS',
+        format = 'LL',      ## 'DD-MM-Y hh:mm:ss',
         applyLabel = 'Apply',
         cancelLabel = 'Cancel',
         customRangeLabel = 'Free Range',
@@ -55,14 +55,7 @@ ui <- fluidPage(
       alwaysShowCalendars = TRUE,
       showCustomRangeLabel = TRUE,
       cancelButtonClasses = "btn-danger"
-    ),
-    initCallback = htmlwidgets::JS('function(start, end, ranges) {
-                                   $("#add_date_here span")
-                                      .html("You picked: " +
-                                            start.format("MMMM D, YYYY") + " - " +
-                                            end.format("MMMM D, YYYY") + "<br>" +
-                                            "From the range: " + ranges)
-                                   }')
+    )
   ),
   # verbatimTextOutput("print"),
   actionButton("act", "Update Daterangepicker"),

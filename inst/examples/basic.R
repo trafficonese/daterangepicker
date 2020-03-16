@@ -14,7 +14,15 @@ ui <- fluidPage(
     ranges = data.frame(
       "Today" = Sys.Date(),
       "Yesterday" = Sys.Date() - 1,
-      "Last 3 Days" = c(Sys.Date() - 2, Sys.Date()))
+      "Last 3 Days" = c(Sys.Date() - 2, Sys.Date())),
+    options = daterangepickerOptions(
+      autoUpdateInput = FALSE,
+      cancelIsClear = TRUE
+      ,locale = list(
+        format = "YYYY-MM-DD",
+        cancelLabel = 'Clear'
+      )
+    )
   ),
   verbatimTextOutput("print"),
   actionButton("act", "Update Daterangepicker")
