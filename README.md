@@ -5,6 +5,10 @@
 </p>
 
 <!-- badges: start -->
+[![](https://www.r-pkg.org/badges/version/daterangepicker)](https://www.r-pkg.org/pkg/daterangepicker)
+[![cran checks](https://cranchecks.info/badges/worst/daterangepicker)](https://cran.r-project.org/web/checks/check_results_daterangepicker.html)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/daterangepicker?color=brightgreen)](https://www.r-pkg.org/pkg/daterangepicker)
+[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/daterangepicker)](https://www.rpackages.io/package/daterangepicker)
 [![Travis build status](https://travis-ci.org/trafficonese/daterangepicker.svg?branch=master)](https://travis-ci.org/trafficonese/daterangepicker)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/trafficonese/daterangepicker?branch=master&svg=true)](https://ci.appveyor.com/project/trafficonese/daterangepicker)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
@@ -13,8 +17,13 @@
 
 Custom Shiny input binding for a [Date Range Picker](https://www.daterangepicker.com/).
 
-## Installation
+## Installation from CRAN
 
+``` r
+install.packages("daterangepicker")
+```
+
+or the dev version:
 ``` r
 # install.packages("remotes")
 remotes::install_github("trafficones/daterangepicker")
