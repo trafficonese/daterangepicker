@@ -26,7 +26,7 @@ install.packages("daterangepicker")
 or the dev version:
 ``` r
 # install.packages("remotes")
-remotes::install_github("trafficones/daterangepicker")
+remotes::install_github("trafficonese/daterangepicker")
 ```
 
 ## Example
