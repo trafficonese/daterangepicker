@@ -125,9 +125,9 @@ daterangepicker <- function(inputId = NULL,
       # "moment/moment.min.js",
       "moment/moment.locales.min.js",
       "daterangepicker/daterangepicker.min.js",
-      "daterangepicker-bindings.js"
+      "daterangepicker-bindings.min.js"
     ),
-    stylesheet = "daterangepicker/daterangepicker.css"
+    stylesheet = "daterangepicker/daterangepicker.min.css"
   )
   #######################
   x

@@ -62,10 +62,9 @@ makeInput <- function(label, inputId, class, icon, style, options) {
 #' @param label The label of the daterangepicker
 #' @param inputId The inputId of the daterangepicker
 makeLabel <- function(label, inputId) {
-  if (!is.null(label)) {
-    tags$label(label, class = "control-label",
-               class = if (is.null(label)) "shiny-label-null", `for` = inputId)
-  } else {
+  if (is.null(label)) {
     NULL
+  } else {
+    tags$label(label, class = "control-label", `for` = inputId)
   }
 }
