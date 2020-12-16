@@ -9,10 +9,10 @@
 [![cran checks](https://cranchecks.info/badges/worst/daterangepicker)](https://cran.r-project.org/web/checks/check_results_daterangepicker.html)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/daterangepicker?color=brightgreen)](https://www.r-pkg.org/pkg/daterangepicker)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/daterangepicker)](https://www.rpackages.io/package/daterangepicker)
+[![R build status](https://github.com/trafficonese/daterangepicker/workflows/R-CMD-check/badge.svg)](https://github.com/trafficonese/daterangepicker/actions)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/trafficonese/daterangepicker?branch=master&svg=true)](https://ci.appveyor.com/project/trafficonese/daterangepicker)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Codecov test coverage](https://codecov.io/gh/trafficonese/daterangepicker/branch/master/graph/badge.svg)](https://codecov.io/gh/trafficonese/daterangepicker?branch=master)
-[![R build status](https://github.com/trafficonese/daterangepicker/workflows/R-CMD-check/badge.svg)](https://github.com/trafficonese/daterangepicker/actions)
 <!-- badges: end -->
 
 Custom Shiny input binding for a [Date Range Picker](https://www.daterangepicker.com/).
