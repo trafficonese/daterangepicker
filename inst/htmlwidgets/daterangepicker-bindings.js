@@ -70,6 +70,7 @@ $.extend(DateRangePickerBinding, {
     // Get start/end time
     start = $(el).data("daterangepicker").startDate;
     end = $(el).data("daterangepicker").endDate;
+
     // If timePicker is true, we return a POSIX otherwise a Date
     if ($(el).data("daterangepicker").timePicker === true) {
       // Make a Timestamp
@@ -99,12 +100,6 @@ $.extend(DateRangePickerBinding, {
       callback();
     });
     $(el).on("hide.daterangepicker", function(event) {
-      callback();
-    });
-    $(el).on("showCalendar.daterangepicker", function(event) {
-      callback();
-    });
-    $(el).on("hideCalendar.daterangepicker", function(event) {
       callback();
     });
     $(el).on("apply.daterangepicker", function(event) {
