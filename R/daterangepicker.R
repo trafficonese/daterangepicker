@@ -122,8 +122,7 @@ daterangepicker <- function(inputId = NULL,
     version = "1.0.0",
     src = system.file("htmlwidgets", package = "daterangepicker"),
     script = c(
-      # "moment/moment.min.js",
-      "moment/moment.locales.min.js",
+      ifelse(is.null(language), "moment/moment.min.js", "moment/moment.locales.min.js"),
       "daterangepicker/daterangepicker.min.js",
       "daterangepicker-bindings.min.js"
     ),
