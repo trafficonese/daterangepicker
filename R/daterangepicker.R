@@ -3,6 +3,7 @@
 #' The Date Range Picker pops up two calendars for selecting dates, times, or
 #' predefined ranges like "Yesterday", "Last 30 Days", etc.
 #'
+#' @importFrom shiny restoreInput
 #' @importFrom htmltools htmlDependencies<- htmlDependencies htmlDependency tags
 #'   tagList
 #' @importFrom jsonify to_json
@@ -91,6 +92,12 @@ daterangepicker <- function(inputId = NULL,
   if (!is.null(min)) min <- as.character(min)
   if (!is.null(max)) max <- as.character(max)
   if (!is.null(ranges)) ranges <- checkRanges(ranges)
+  #######################
+
+  ## Enable Bookmarking / Restore #####################
+  restored <- restoreInput(id = inputId, default = list(start, end))
+  start <- restored[[1]]
+  end <- restored[[2]]
   #######################
 
   ## Fill + Filter options #######################
