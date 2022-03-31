@@ -13,6 +13,7 @@ Depends:
 Imports:
   htmltools,
   jsonify,
+  utils,
   shiny
 URL: https://github.com/trafficonese/daterangepicker/, https://www.daterangepicker.com
 BugReports: https://github.com/trafficonese/daterangepicker/issues

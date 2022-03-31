@@ -7,6 +7,7 @@
 #' @importFrom htmltools htmlDependencies<- htmlDependencies htmlDependency tags
 #'   tagList
 #' @importFrom jsonify to_json
+#' @importFrom utils packageVersion
 #'
 #' @param inputId The input ID
 #' @param label The label for the control, or NULL for no label.
@@ -73,17 +74,17 @@
 #' }
 #' shinyApp(ui, server)
 #' }
-daterangepicker <- function(inputId = NULL,
-                            label = "Select a Date",
-                            start = NULL, end = NULL,
-                            min = NULL, max = NULL,
-                            ranges = NULL,
-                            language = "en",
-                            style = "width:100%;border-radius:4px;text-align:center;",
-                            class = NULL,
-                            icon = NULL,
-                            options = daterangepickerOptions()
-                            ) {
+daterangepicker <- function(
+  inputId = NULL,
+  label = "Select a Date",
+  start = NULL, end = NULL,
+  min = NULL, max = NULL,
+  ranges = NULL,
+  language = "en",
+  style = "width:100%;border-radius:4px;text-align:center;",
+  class = NULL,
+  icon = NULL,
+  options = daterangepickerOptions()) {
 
   ## Check Inputs #######################
   if (is.null(inputId)) stop("Daterangepicker needs an `inputId`")
@@ -103,12 +104,12 @@ daterangepicker <- function(inputId = NULL,
   ## Fill + Filter options #######################
   options <- filterEMPTY(c(
     list(
-    start = start,
-    end = end,
-    minDate = min, maxDate = max,
-    ranges = ranges,
-    language = language
-  ), options))
+      start = start,
+      end = end,
+      minDate = min, maxDate = max,
+      ranges = ranges,
+      language = language
+    ), options))
   #######################
 
   ## Make Input Tag #######################
@@ -121,7 +122,8 @@ daterangepicker <- function(inputId = NULL,
     version = packageVersion("daterangepicker"),
     src = system.file("htmlwidgets", package = "daterangepicker"),
     script = c(
-      ifelse(is.null(language), "moment/moment.min.js", "moment/moment.locales.min.js"),
+      ifelse(is.null(language), "moment/moment.min.js",
+             "moment/moment.locales.min.js"),
       "daterangepicker/daterangepicker.min.js",
       "daterangepicker-bindings.js"
     ),
