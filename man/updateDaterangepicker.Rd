@@ -13,30 +13,41 @@ updateDaterangepicker(
   min = NULL,
   max = NULL,
   icon = NULL,
-  options = NULL
+  options = NULL,
+  ranges = NULL,
+  style = NULL,
+  class = NULL
 )
 }
 \arguments{
 \item{session}{The session object passed to function given to shinyServer.}
 
-\item{inputId}{The id of the input object.}
+\item{inputId}{The input ID}
 
-\item{label}{The label to set for the input object.}
+\item{label}{The label for the control, or NULL for no label.}
 
-\item{start}{The start date. Either a Date object, or a string in yyyy-mm-dd
-format.}
+\item{start}{The beginning date of the initially selected. Must be a Date /
+POSIXt or string. If NULL will default to the current day.}
 
-\item{end}{The end date. Either a Date object, or a string in yyyy-mm-dd
-format.}
+\item{end}{The end date of the initially selected date range. Must be a Date
+/ POSIXt or string. If NULL will default to the current day.}
 
-\item{min}{The earliest date a user may select.}
+\item{min}{The earliest date a user may select. Must be a Date or string}
 
-\item{max}{The latest date a user may select.}
+\item{max}{The latest date a user may select. Must be a Date or string}
 
 \item{icon}{Icon to display next to the label.}
 
 \item{options}{List of further options. See
 \code{\link{daterangepickerOptions}}}
+
+\item{ranges}{Set predefined date ranges the user can select from. Each key
+is the label for the range, and its value an array with two dates
+representing the bounds of the range.}
+
+\item{style}{Add CSS-styles to the input.}
+
+\item{class}{Custom class}
 }
 \description{
 Change the start and end values of a daterangepicker on the client

@@ -1,7 +1,7 @@
 Package: daterangepicker
 Type: Package
 Title: Create a Shiny Date-Range Input
-Version: 0.1.0
+Version: 0.1.999
 Authors@R: c(
     person("Sebastian","Gatscha", email = "sebastian_gatscha@gmx.at", role = c("aut", "cre"))
     )

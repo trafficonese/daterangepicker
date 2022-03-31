@@ -28,7 +28,8 @@ daterangepickerOptions(
   singleDatePicker = FALSE,
   autoApply = FALSE,
   linkedCalendars = TRUE,
-  autoUpdateInput = TRUE
+  autoUpdateInput = TRUE,
+  ...
 )
 }
 \arguments{
@@ -97,7 +98,7 @@ Button.}
 
 \item{locale}{Allows you to provide localized strings for buttons and labels,
 customize the date format, and change the first day of week for the
-calendars.}
+calendars. See the examples in `./inst/examples/`}
 
 \item{singleDatePicker}{Show only a single calendar to choose one date,
 instead of a range picker with two calendars. The start and end dates
@@ -115,6 +116,9 @@ month/year.}
 \item{autoUpdateInput}{Indicates whether the date range picker should
 automatically update the value of the <input> element it's attached to at
 initialization and when the selected dates change.}
+
+\item{...}{Further arguments passed to `daterangepicker`, like
+\code{isInvalidDate} or \code{isCustomDate}.}
 }
 \description{
 Update the daterangepicker

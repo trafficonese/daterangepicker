@@ -111,14 +111,6 @@ daterangepicker <- function(inputId = NULL,
   ), options))
   #######################
 
-  ## (NOT USED) Adapt time format, if not given in options$locale List ################
-  # if (is.null(options$locale)) {
-  #   format <- ifelse(nchar(end) > 10 &&
-  #                    nchar(start) > 10, "DD-MM-Y HH:MM:SS", "DD-MM-Y")
-  #   options$locale <- list("format" = format)
-  # }
-  #######################
-
   ## Make Input Tag #######################
   x <- makeInput(label, inputId, class, icon, style, options)
   #######################
@@ -126,12 +118,12 @@ daterangepicker <- function(inputId = NULL,
   ## Attach dependencies and output ###################
   htmlDependencies(x) <- htmlDependency(
     name = "daterangepicker",
-    version = "1.0.0",
+    version = packageVersion("daterangepicker"),
     src = system.file("htmlwidgets", package = "daterangepicker"),
     script = c(
       ifelse(is.null(language), "moment/moment.min.js", "moment/moment.locales.min.js"),
       "daterangepicker/daterangepicker.min.js",
-      "daterangepicker-bindings.min.js"
+      "daterangepicker-bindings.js"
     ),
     stylesheet = "daterangepicker/daterangepicker.min.css"
   )
@@ -188,7 +180,7 @@ daterangepicker <- function(inputId = NULL,
 #'   Button.
 #' @param locale Allows you to provide localized strings for buttons and labels,
 #'   customize the date format, and change the first day of week for the
-#'   calendars.
+#'   calendars. See the examples in `./inst/examples/`
 #' @param singleDatePicker Show only a single calendar to choose one date,
 #'   instead of a range picker with two calendars. The start and end dates
 #'   provided to your callback will be the same single date chosen.
@@ -204,6 +196,8 @@ daterangepicker <- function(inputId = NULL,
 #'   initialization and when the selected dates change.
 #' @param parentEl jQuery selector of the parent element that the date range
 #'   picker will be added to, if not provided this will be 'body'
+#' @param ... Further arguments passed to `daterangepicker`, like
+#'   \code{isInvalidDate} or \code{isCustomDate}.
 #'
 #' @seealso
 #' \href{https://www.daterangepicker.com/#config}{www.daterangepicker.com}
@@ -234,7 +228,8 @@ daterangepickerOptions <- function(minYear = NULL, maxYear = NULL,
                                    linkedCalendars = TRUE,
                                    # isInvalidDate = NULL, ## JS
                                    # isCustomDate = NULL, ## JS
-                                   autoUpdateInput = TRUE) {
+                                   autoUpdateInput = TRUE,
+                                   ...) {
 
   ## Check Inputs ###################
   if (!is.null(maxSpan)) checkMaxSpan(maxSpan)
@@ -267,7 +262,8 @@ daterangepickerOptions <- function(minYear = NULL, maxYear = NULL,
     # isInvalidDate = isInvalidDate, ## JS
     # isCustomDate = isCustomDate, ## JS
     autoUpdateInput = autoUpdateInput,
-    parentEl = parentEl
+    parentEl = parentEl,
+    ...
   ))
 }
 
@@ -285,23 +281,15 @@ daterangepickerOptions <- function(minYear = NULL, maxYear = NULL,
 #' Change the start and end values of a daterangepicker on the client
 #'
 #' @param session The session object passed to function given to shinyServer.
-#' @param inputId The id of the input object.
-#' @param label The label to set for the input object.
-#' @param start The start date. Either a Date object, or a string in yyyy-mm-dd
-#'   format.
-#' @param end The end date. Either a Date object, or a string in yyyy-mm-dd
-#'   format.
-#' @param min The earliest date a user may select.
-#' @param max The latest date a user may select.
-#' @param icon Icon to display next to the label.
-#' @param options List of further options. See
-#'   \code{\link{daterangepickerOptions}}
+#' @inheritParams daterangepicker
 #' @family daterangepicker Functions
 #' @export
 updateDaterangepicker <- function(session, inputId, label = NULL,
                                   start = NULL, end = NULL,
                                   min = NULL, max = NULL,
-                                  icon = NULL, options = NULL) {
+                                  icon = NULL, options = NULL,
+                                  ranges = NULL, style = NULL,
+                                  class = NULL) {
 
   ## If no icon was passed initially, we need to create a WebDependency-list
   ## On the JS-side `Shiny.renderDependencies` adds the deps to the header
@@ -323,7 +311,10 @@ updateDaterangepicker <- function(session, inputId, label = NULL,
     minDate = min,
     maxDate = max,
     icon = icon,
-    options = options
+    options = options,
+    ranges = ranges,
+    style = style,
+    class = class
   ))
 
   session$sendInputMessage(inputId, message)

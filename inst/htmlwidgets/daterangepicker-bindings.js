@@ -163,6 +163,84 @@ $.extend(DateRangePickerBinding, {
       pickerdata.maxDate = moment(data.maxDate);
     }
 
+    // Update style
+    if (data.hasOwnProperty("style")) {
+      $("#"+data.id).attr("style", data.style);
+    }
+    // Update ranges
+    if (data.hasOwnProperty("ranges")) {
+      if (data.ranges !== undefined || data.ranges !== null) {
+        for (var key in data.ranges) {
+      		if (typeof data.ranges[key] === "string") {
+      		  data.ranges[key] = [moment(data.ranges[key]), moment(data.ranges[key])];
+      		} else {
+      		  for (var i in [0,1]) {
+      		    data.ranges[key].push(moment(data.ranges[key][0]));
+      		    data.ranges[key].shift();
+      		  }
+      		}
+        }
+      }
+      var ranges = {}
+      for (range in data.ranges) {
+          if (typeof data.ranges[range][0] === 'string')
+              start = moment(data.ranges[range][0]);
+          else
+              start = moment(data.ranges[range][0]);
+
+          if (typeof data.ranges[range][1] === 'string')
+              end = moment(data.ranges[range][1]);
+          else
+              end = moment(data.ranges[range][1]);
+
+          // If the start or end date exceed those allowed by the minDate or maxSpan
+          // options, shorten the range to the allowable period.
+          if (pickerdata.minDate && start.isBefore(pickerdata.minDate))
+              start = pickerdata.minDate.clone();
+
+          var maxDate = pickerdata.maxDate;
+          if (pickerdata.maxSpan && maxDate && start.clone().add(pickerdata.maxSpan).isAfter(maxDate))
+              maxDate = start.clone().add(pickerdata.maxSpan);
+          if (maxDate && end.isAfter(maxDate))
+              end = maxDate.clone();
+
+          // If the end of the range is before the minimum or the start of the range is
+          // after the maximum, don't display pickerdata range option at all.
+          if ((pickerdata.minDate && end.isBefore(pickerdata.minDate, pickerdata.timepicker ? 'minute' : 'day'))
+            || (maxDate && start.isAfter(maxDate, pickerdata.timepicker ? 'minute' : 'day'))) {
+              continue;
+            }
+
+          //Support unicode chars in the range names.
+          var elem = document.createElement('textarea');
+          elem.innerHTML = range;
+          var rangeHtml = elem.value;
+
+          ranges[rangeHtml] = [start, end];
+      }
+      pickerdata.ranges = ranges
+      var list = '<ul>';
+      for (range in pickerdata.ranges) {
+          list += '<li data-range-key="' + range + '">' + range + '</li>';
+      }
+      if (pickerdata.showCustomRangeLabel) {
+          list += '<li data-range-key="' + pickerdata.locale.customRangeLabel + '">' + pickerdata.locale.customRangeLabel + '</li>';
+      }
+      list += '</ul>';
+      pickerdata.container.find('.ranges ul').remove()
+      pickerdata.container.find('.ranges').prepend(list);
+    }
+    // Update class
+    if (data.hasOwnProperty("class")) {
+      $("#"+data.id).addClass(data.class);
+    }
+    /*
+    // Update language - Not working - locale is set globally for moment.js
+    if (data.hasOwnProperty("language")) {
+      moment.locale(data.language);
+    }
+    */
+
     // Update options
     if (data.hasOwnProperty("options")) {
       // Update minYear

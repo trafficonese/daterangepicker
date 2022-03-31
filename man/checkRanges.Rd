@@ -3,7 +3,7 @@
 \name{checkRanges}
 \alias{checkRanges}
 \title{checkRanges
-Check the ranges element, for Date objects}
+Check the ranges element, for Date or POSIX objects}
 \usage{
 checkRanges(ranges)
 }
@@ -12,5 +12,5 @@ checkRanges(ranges)
 }
 \description{
 checkRanges
-Check the ranges element, for Date objects
+Check the ranges element, for Date or POSIX objects
 }
