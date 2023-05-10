@@ -6,7 +6,7 @@
 
 <!-- badges: start -->
 [![](https://www.r-pkg.org/badges/version/daterangepicker)](https://www.r-pkg.org/pkg/daterangepicker)
-[![cran checks](https://cranchecks.info/badges/worst/daterangepicker)](https://cran.r-project.org/web/checks/check_results_daterangepicker.html)
+[![cran checks](https://badges.cranchecks.info/worst/daterangepicker.svg)](https://cran.r-project.org/web/checks/check_results_daterangepicker.html)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/daterangepicker?color=brightgreen)](https://www.r-pkg.org/pkg/daterangepicker)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/daterangepicker)](https://cranlogs.r-pkg.org/badges/grand-total/daterangepicker)
 [![R build status](https://github.com/trafficonese/daterangepicker/workflows/R-CMD-check/badge.svg)](https://github.com/trafficonese/daterangepicker/actions)
