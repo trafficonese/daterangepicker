@@ -10,7 +10,6 @@
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/daterangepicker?color=brightgreen)](https://www.r-pkg.org/pkg/daterangepicker)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/daterangepicker)](https://cranlogs.r-pkg.org/badges/grand-total/daterangepicker)
 [![R build status](https://github.com/trafficonese/daterangepicker/workflows/R-CMD-check/badge.svg)](https://github.com/trafficonese/daterangepicker/actions)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/trafficonese/daterangepicker?branch=master&svg=true)](https://ci.appveyor.com/project/trafficonese/daterangepicker)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Codecov test coverage](https://codecov.io/gh/trafficonese/daterangepicker/branch/master/graph/badge.svg)](https://app.codecov.io/gh/trafficonese/daterangepicker?branch=master)
 <!-- badges: end -->
