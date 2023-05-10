@@ -1,3 +1,5 @@
+# daterangepicker 0.2.0
+
 # daterangepicker (dev version)
 * `updateDaterangepicker` can now update `ranges`, `style` and `class`. Added an 
 example to illustrate updates in `inst/examples/updates.R`
