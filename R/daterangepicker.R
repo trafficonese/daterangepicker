@@ -73,9 +73,12 @@
 #'       session, "daterange",
 #'       start = Sys.Date(),
 #'       end = Sys.Date() - 100,
-#'       ranges = list(Sys.Date(), Sys.Date() - 1, c(Sys.Date() - 3, Sys.Date()), c(Sys.Date() - 6, Sys.Date()),
+#'       ranges = list(Sys.Date(), Sys.Date() - 1,
+#'                     c(Sys.Date() - 3, Sys.Date()),
+#'                     c(Sys.Date() - 6, Sys.Date()),
 #'                     Sys.Date() + 2),
-#'       rangeNames = c("Today", "Yesterday", "Last 3 days", "Last 7 days", "The day after tomorrow \u263a"),
+#'       rangeNames = c("Today", "Yesterday", "Last 3 days",
+#'                      "Last 7 days", "The day after tomorrow \u263a"),
 #'       max = Sys.Date() + 2
 #'     )
 #'   })
