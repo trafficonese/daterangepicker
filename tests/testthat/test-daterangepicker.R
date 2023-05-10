@@ -25,6 +25,19 @@ test_that("daterangepicker", {
                                ranges = list("Gestern" = 12,
                                              "Heute" = "a",
                                              "Letzten 45 Tage" = list(1213))))
+  expect_error(daterangepicker(inputId = "daterange",
+                               icon = shiny::icon("calendar"),
+                               start = start, end = end,
+                               ranges = list(Sys.Date() - 1, Sys.Date(), c(Sys.Date() - 44, Sys.Date())),
+                               rangeNames = c("Yesterday", "Today", "Last 45 days", "Wrong length")))
+
+  expect_warning(daterangepicker(inputId = "daterange",
+                                 icon = shiny::icon("calendar"),
+                                 start = start, end = end,
+                                 ranges = list("Gestern" = Sys.Date() - 1,
+                                               "Heute" = Sys.Date(),
+                                               "Letzten 45 Tage" = c(Sys.Date() - 44, Sys.Date())),
+                                 rangeNames = c("Yesterday", "Today", "Last 45 days")))
 
 
   ## Daterangepicker ############################
@@ -106,6 +119,18 @@ test_that("daterangepicker", {
                   "Letzten 7 Tage" = c(Sys.Date() - 6, Sys.Date()),
                   "Letzten 45 Tage" = c(Sys.Date() - 44, Sys.Date())
     ))
+  expect_is(x, "shiny.tag")
+  expect_length(object = htmltools::findDependencies(x), n = 2)
+
+  x <- daterangepicker(
+    inputId = "daterange",
+    icon = shiny::icon("calendar"),
+    start = start, end = end,
+    ranges = list(Sys.Date() - 1, Sys.Date(), c(Sys.Date() - 2, Sys.Date()), c(Sys.Date() - 6, Sys.Date()),
+                  c(Sys.Date() - 44, Sys.Date())
+    ),
+    rangeNames = c("Gestern", "Heute", "Letzten 3 Tage", "Letzten 7 Tage", "Letzten 45 Tage")
+  )
   expect_is(x, "shiny.tag")
   expect_length(object = htmltools::findDependencies(x), n = 2)
 

@@ -20,6 +20,10 @@
 #' @param ranges Set predefined date ranges the user can select from. Each key
 #'   is the label for the range, and its value an array with two dates
 #'   representing the bounds of the range.
+#'   Alternatively, the labels can be specified via `rangeNames`. If that argument is used, `ranges` should not be
+#'   named and `rangeNames` will take precedence..
+#' @param rangeNames Optional character vector specifying the labels for predefined date ranges.
+#'   If specified, it will override the names of `ranges`.
 #' @param language The language used for month and day names. Default is "en".
 #'   See the \href{https://momentjs.com/}{Multiple Locale Support} for a list of
 #'   other valid values.
@@ -37,7 +41,6 @@
 #' @examples if (interactive()) {
 #' library(shiny)
 #' library(daterangepicker)
-#'
 #' ## UI ##########################
 #' ui <- fluidPage(
 #'   tags$head(tags$style(".myclass {background-color: #96dafb;}")),
@@ -59,7 +62,6 @@
 #'   verbatimTextOutput("print"),
 #'   actionButton("act", "Update Daterangepicker"),
 #' )
-#'
 #' ## SERVER ##########################
 #' server <- function(input, output, session) {
 #'   output$print <- renderPrint({
@@ -67,9 +69,15 @@
 #'     input$daterange
 #'   })
 #'   observeEvent(input$act, {
-#'     updateDaterangepicker(session, "daterange",
-#'                           start = Sys.Date(),
-#'                           end = Sys.Date() - 100)
+#'     updateDaterangepicker(
+#'       session, "daterange",
+#'       start = Sys.Date(),
+#'       end = Sys.Date() - 100,
+#'       ranges = list(Sys.Date(), Sys.Date() - 1, c(Sys.Date() - 3, Sys.Date()), c(Sys.Date() - 6, Sys.Date()),
+#'                     Sys.Date() + 2),
+#'       rangeNames = c("Today", "Yesterday", "Last 3 days", "Last 7 days", "The day after tomorrow \u263a"),
+#'       max = Sys.Date() + 2
+#'     )
 #'   })
 #' }
 #' shinyApp(ui, server)
@@ -80,6 +88,7 @@ daterangepicker <- function(
   start = NULL, end = NULL,
   min = NULL, max = NULL,
   ranges = NULL,
+  rangeNames = names(ranges),
   language = "en",
   style = "width:100%;border-radius:4px;text-align:center;",
   class = NULL,
@@ -92,7 +101,17 @@ daterangepicker <- function(
   if (!is.null(end)) end <- as.character(end)
   if (!is.null(min)) min <- as.character(min)
   if (!is.null(max)) max <- as.character(max)
-  if (!is.null(ranges)) ranges <- checkRanges(ranges)
+  if (!is.null(ranges)) {
+    ranges <- checkRanges(ranges)
+    if (!is.null(names(ranges)) && !missing(rangeNames)) {
+      warning("`ranges` is named and `rangeNames` is provided. Ignoring names of `ranges`.")
+    }
+    rangeNames <- as.character(rangeNames)
+    ranges <- unname(ranges)
+    if (length(rangeNames) != length(ranges)) {
+      stop("`ranges` and `rangeNames` must have the same length")
+    }
+  }
   #######################
 
   ## Enable Bookmarking / Restore #####################
@@ -107,7 +126,7 @@ daterangepicker <- function(
       start = start,
       end = end,
       minDate = min, maxDate = max,
-      ranges = ranges,
+      ranges = ranges, rangeNames = rangeNames,
       language = language
     ), options))
   #######################
@@ -290,7 +309,7 @@ updateDaterangepicker <- function(session, inputId, label = NULL,
                                   start = NULL, end = NULL,
                                   min = NULL, max = NULL,
                                   icon = NULL, options = NULL,
-                                  ranges = NULL, style = NULL,
+                                  ranges = NULL, rangeNames = NULL, style = NULL,
                                   class = NULL) {
 
   ## If no icon was passed initially, we need to create a WebDependency-list
@@ -315,6 +334,7 @@ updateDaterangepicker <- function(session, inputId, label = NULL,
     icon = icon,
     options = options,
     ranges = ranges,
+    rangeNames = rangeNames,
     style = style,
     class = class
   ))
