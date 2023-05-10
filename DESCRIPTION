@@ -9,13 +9,15 @@ Maintainer: Sebastian Gatscha <sebastian_gatscha@gmx.at>
 Description: A Shiny Input for date-ranges, which pops up two calendars for selecting dates, times, or predefined ranges like "Last 30 Days". It wraps the JavaScript library 'daterangepicker' which is available at <https://www.daterangepicker.com>.
 License: MIT + file LICENSE
 Depends:
-  R (>= 3.6.0)
+  R (>= 3.2.0)
 Imports:
   htmltools,
   jsonify,
   utils,
   shiny
-URL: https://github.com/trafficonese/daterangepicker/, https://www.daterangepicker.com
+URL: https://github.com/trafficonese/daterangepicker/,
+    https://www.daterangepicker.com,
+    https://trafficonese.github.io/daterangepicker/
 BugReports: https://github.com/trafficonese/daterangepicker/issues
 Encoding: UTF-8
 RoxygenNote: 7.2.3

@@ -1,7 +1,6 @@
-url: https://trafficonese.github.io/daterangepicker
+url: https://trafficonese.github.io/daterangepicker/
 template:
   bootstrap: 5
   package: preferably
-
 navbar:
-  title: "daterangepicker"
+  title: daterangepicker

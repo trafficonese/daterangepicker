@@ -1,13 +1,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
-^\.travis\.yml$
-^codecov\.yml$
-^_pkgdown\.yml$
+[.](yml|yaml|md|Rmd)$
 ^docs$
-^pkgdown$
 ^trials$
-^appveyor\.yml$
 ^CRAN-RELEASE$
 ^cran-comments\.md$
 ^\.github$
