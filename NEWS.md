@@ -1,3 +1,5 @@
+# daterangepicker (development version)
+
 # daterangepicker 0.2.0
 
 * `updateDaterangepicker` can now update `ranges`, `style` and `class`. Added an 
