@@ -10,11 +10,12 @@ filterEMPTY <- function(x) {
 #' @param ranges The list of ranges
 checkRanges <- function(ranges) {
   cls <- lapply(ranges, class)
-  if (!all(unlist(cls) %in% c("Date","POSIXct","POSIXt","POSIXlt"))) {
-    stop("All elements of `ranges` must be of class:\n",
-         "`Date`, `POSIXct`, `POSIXlt` or `POSIXt`.")
+  if (!all(unlist(cls) %in% c("Date", "POSIXct", "POSIXt", "POSIXlt"))) {
+    stop(
+      "All elements of `ranges` must be of class:\n",
+      "`Date`, `POSIXct`, `POSIXlt` or `POSIXt`."
+    )
   } else {
-    # ranges <- lapply(ranges, as.POSIXct, origin = "1970-01-01")
     ranges <- lapply(ranges, as.character)
   }
   ranges
@@ -24,13 +25,19 @@ checkRanges <- function(ranges) {
 #' Check the maxSpan element, for Time objects
 #' @param maxSpan The list of ranges
 checkMaxSpan <- function(maxSpan) {
-  if (!is.list(maxSpan) && length(maxSpan) == 1)
+  if (!is.list(maxSpan) && length(maxSpan) == 1) {
     stop("`maxSpan` must be a named list with a numeric value.")
-  choicesmaxspan <- c("milliseconds","seconds","minutes",
-                      "days","months","years")
-  if (!names(maxSpan) %in% choicesmaxspan)
-    stop("The valid names for `maxSpan` are:\n",
-         paste(choicesmaxspan, collapse = ", "))
+  }
+  choicesmaxspan <- c(
+    "milliseconds", "seconds", "minutes",
+    "days", "months", "years"
+  )
+  if (!names(maxSpan) %in% choicesmaxspan) {
+    stop(
+      "The valid names for `maxSpan` are:\n",
+      paste(choicesmaxspan, collapse = ", ")
+    )
+  }
 }
 
 #' makeInput

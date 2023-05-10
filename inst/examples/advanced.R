@@ -10,7 +10,7 @@ ui <- fluidPage(
   tags$head(tags$style(".myclass {
                         margin-left: 400px;
                         background-color: #96dafb;}")),
-  br(),br(),
+  br(), br(),
   daterangepicker(
     inputId = "daterange",
     label = "Pick a Date",
@@ -35,20 +35,20 @@ ui <- fluidPage(
       minYear = 1990, maxYear = 2020,
       opens = "center",
       drops = "down",
-      showDropdowns = T,
+      showDropdowns = TRUE,
       maxSpan = list("years" = 1),
       autoUpdateInput = TRUE,
       linkedCalendars = FALSE,
       showWeekNumbers = TRUE,
       singleDatePicker = FALSE,
       locale = list(
-        direction = 'ltr',  ## or rtl
-        separator = ' <-> ',
-        format = 'LL',      ## 'DD-MM-Y hh:mm:ss',
-        applyLabel = 'Apply',
-        cancelLabel = 'Cancel',
-        customRangeLabel = 'Free Range',
-        weekLabel = 'W',
+        direction = "ltr",  ## or rtl
+        separator = " <-> ",
+        format = "LL",      ## "DD-MM-Y hh:mm:ss",
+        applyLabel = "Apply",
+        cancelLabel = "Cancel",
+        customRangeLabel = "Free Range",
+        weekLabel = "W",
         firstDay = 1,
         daysOfWeek = format(seq.Date(as.Date("2000-01-03"),
                                      as.Date("2000-01-09"),

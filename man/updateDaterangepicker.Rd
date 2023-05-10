@@ -45,11 +45,13 @@ POSIXt or string. If NULL will default to the current day.}
 \item{ranges}{Set predefined date ranges the user can select from. Each key
 is the label for the range, and its value an array with two dates
 representing the bounds of the range.
-Alternatively, the labels can be specified via `rangeNames`. If that argument is used, `ranges` should not be
-named and `rangeNames` will take precedence..}
+Alternatively, the labels can be specified via `rangeNames`. If that
+argument is used, `ranges` should not be named and `rangeNames` will
+take precedence.}
 
-\item{rangeNames}{Optional character vector specifying the labels for predefined date ranges.
-If specified, it will override the names of `ranges`.}
+\item{rangeNames}{Optional character vector specifying the labels for
+predefined date ranges. If specified, it will override the names
+of `ranges`.}
 
 \item{style}{Add CSS-styles to the input.}
 

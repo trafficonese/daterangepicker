@@ -4,6 +4,7 @@
 [.](yml|yaml|md|Rmd)$
 ^docs$
 ^trials$
+^bower_components$
 ^CRAN-RELEASE$
 ^cran-comments\.md$
 ^\.github$

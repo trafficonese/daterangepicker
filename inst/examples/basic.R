@@ -20,7 +20,7 @@ ui <- fluidPage(
       cancelIsClear = TRUE,
       locale = list(
         format = "YYYY-MM-DD",
-        cancelLabel = 'Clear'
+        cancelLabel = "Clear"
       )
     )
   ),

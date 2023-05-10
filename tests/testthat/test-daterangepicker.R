@@ -11,33 +11,50 @@ test_that("daterangepicker", {
   expect_error(daterangepicker())
   ## Wrong maxSpan
   expect_error(
-    daterangepicker(inputId = "daterange", start = start, end = end,
-                    options = daterangepickerOptions(maxSpan = "days")))
+    daterangepicker(
+      inputId = "daterange", start = start, end = end,
+      options = daterangepickerOptions(maxSpan = "days")
+    )
+  )
   ## Wrong maxSpan
   expect_error(
-    daterangepicker(inputId = "daterange", start = start, end = end,
-                    options = daterangepickerOptions(
-                      maxSpan = list("days1" = 8))))
+    daterangepicker(
+      inputId = "daterange", start = start, end = end,
+      options = daterangepickerOptions(
+        maxSpan = list("days1" = 8)
+      )
+    )
+  )
   ## Wrong Ranges
-  expect_error(daterangepicker(inputId = "daterange",
-                               icon = shiny::icon("calendar"),
-                               start = start, end = end,
-                               ranges = list("Gestern" = 12,
-                                             "Heute" = "a",
-                                             "Letzten 45 Tage" = list(1213))))
-  expect_error(daterangepicker(inputId = "daterange",
-                               icon = shiny::icon("calendar"),
-                               start = start, end = end,
-                               ranges = list(Sys.Date() - 1, Sys.Date(), c(Sys.Date() - 44, Sys.Date())),
-                               rangeNames = c("Yesterday", "Today", "Last 45 days", "Wrong length")))
+  expect_error(daterangepicker(
+    inputId = "daterange",
+    icon = shiny::icon("calendar"),
+    start = start, end = end,
+    ranges = list(
+      "Gestern" = 12,
+      "Heute" = "a",
+      "Letzten 45 Tage" = list(1213)
+    )
+  ))
+  expect_error(daterangepicker(
+    inputId = "daterange",
+    icon = shiny::icon("calendar"),
+    start = start, end = end,
+    ranges = list(Sys.Date() - 1, Sys.Date(), c(Sys.Date() - 44, Sys.Date())),
+    rangeNames = c("Yesterday", "Today", "Last 45 days", "Wrong length")
+  ))
 
-  expect_warning(daterangepicker(inputId = "daterange",
-                                 icon = shiny::icon("calendar"),
-                                 start = start, end = end,
-                                 ranges = list("Gestern" = Sys.Date() - 1,
-                                               "Heute" = Sys.Date(),
-                                               "Letzten 45 Tage" = c(Sys.Date() - 44, Sys.Date())),
-                                 rangeNames = c("Yesterday", "Today", "Last 45 days")))
+  expect_warning(daterangepicker(
+    inputId = "daterange",
+    icon = shiny::icon("calendar"),
+    start = start, end = end,
+    ranges = list(
+      "Gestern" = Sys.Date() - 1,
+      "Heute" = Sys.Date(),
+      "Letzten 45 Tage" = c(Sys.Date() - 44, Sys.Date())
+    ),
+    rangeNames = c("Yesterday", "Today", "Last 45 days")
+  ))
 
 
   ## Daterangepicker ############################
@@ -46,65 +63,82 @@ test_that("daterangepicker", {
   expect_null(unlist(x$children[2]))
   expect_length(object = htmltools::findDependencies(x), n = 1)
   expect_true("daterangepicker" %in% unlist(
-    lapply(htmltools::findDependencies(x), `[[`, "name")))
+    lapply(htmltools::findDependencies(x), `[[`, "name")
+  ))
 
   x <- daterangepicker(inputId = "daterange", start = start)
   expect_is(x, "shiny.tag")
   expect_null(unlist(x$children[2]))
   expect_length(object = htmltools::findDependencies(x), n = 1)
   expect_true("daterangepicker" %in% unlist(
-    lapply(htmltools::findDependencies(x), `[[`, "name")))
+    lapply(htmltools::findDependencies(x), `[[`, "name")
+  ))
 
   x <- daterangepicker(inputId = "daterange", end = end)
   expect_is(x, "shiny.tag")
   expect_null(unlist(x$children[2]))
   expect_length(object = htmltools::findDependencies(x), n = 1)
   expect_true("daterangepicker" %in% unlist(
-    lapply(htmltools::findDependencies(x), `[[`, "name")))
+    lapply(htmltools::findDependencies(x), `[[`, "name")
+  ))
 
-  x <- daterangepicker(inputId = "daterange", label = NULL,
-                       start = start, end = end)
+  x <- daterangepicker(
+    inputId = "daterange", label = NULL,
+    start = start, end = end
+  )
   expect_is(x, "shiny.tag")
   expect_null(unlist(x$children[1:2]))
   expect_length(object = htmltools::findDependencies(x), n = 1)
   expect_true("daterangepicker" %in% unlist(
-    lapply(htmltools::findDependencies(x), `[[`, "name")))
+    lapply(htmltools::findDependencies(x), `[[`, "name")
+  ))
 
-  x <- daterangepicker(inputId = "daterange",
-                       start = start, end = end)
+  x <- daterangepicker(
+    inputId = "daterange",
+    start = start, end = end
+  )
   expect_is(x, "shiny.tag")
   expect_null(x$children[[2]])
   expect_length(object = htmltools::findDependencies(x), n = 1)
 
-  x <- daterangepicker(inputId = "daterange",
-                       icon = shiny::icon("calendar"),
-                       start = start, end = end)
+  x <- daterangepicker(
+    inputId = "daterange",
+    icon = shiny::icon("calendar"),
+    start = start, end = end
+  )
   expect_is(x, "shiny.tag")
   expect_false(is.null(x$children[[2]]))
   expect_type(x$children[[2]], "list")
   expect_length(object = htmltools::findDependencies(x), n = 2)
   expect_true("daterangepicker" %in% unlist(
-    lapply(htmltools::findDependencies(x), `[[`, "name")))
+    lapply(htmltools::findDependencies(x), `[[`, "name")
+  ))
 
-  x <- daterangepicker(inputId = "daterange",
-                       icon = shiny::icon("calendar"),
-                       start = start, end = end,
-                       max = Sys.Date())
+  x <- daterangepicker(
+    inputId = "daterange",
+    icon = shiny::icon("calendar"),
+    start = start, end = end,
+    max = Sys.Date()
+  )
   expect_is(x, "shiny.tag")
   expect_length(object = htmltools::findDependencies(x), n = 2)
 
-  x <- daterangepicker(inputId = "daterange",
-                       icon = shiny::icon("calendar"),
-                       start = start, end = end,
-                       min = Sys.Date() - 10)
+  x <- daterangepicker(
+    inputId = "daterange",
+    icon = shiny::icon("calendar"),
+    start = start, end = end,
+    min = Sys.Date() - 10
+  )
   expect_is(x, "shiny.tag")
   expect_length(object = htmltools::findDependencies(x), n = 2)
 
-  x <- daterangepicker(inputId = "daterange",
-                       icon = shiny::icon("calendar"),
-                       start = start, end = end,
-                       min = Sys.Date() - 10,
-                       max = Sys.Date())
+  x <- daterangepicker(
+    inputId = "daterange",
+    icon = shiny::icon("calendar"),
+    start = start, end = end,
+    min = Sys.Date() - 10,
+    max = Sys.Date()
+  )
   expect_is(x, "shiny.tag")
   expect_length(object = htmltools::findDependencies(x), n = 2)
 
@@ -113,12 +147,14 @@ test_that("daterangepicker", {
     inputId = "daterange",
     icon = shiny::icon("calendar"),
     start = start, end = end,
-    ranges = list("Gestern" = Sys.Date() - 1,
-                  "Heute" = Sys.Date(),
-                  "Letzten 3 Tage" = c(Sys.Date() - 2, Sys.Date()),
-                  "Letzten 7 Tage" = c(Sys.Date() - 6, Sys.Date()),
-                  "Letzten 45 Tage" = c(Sys.Date() - 44, Sys.Date())
-    ))
+    ranges = list(
+      "Gestern" = Sys.Date() - 1,
+      "Heute" = Sys.Date(),
+      "Letzten 3 Tage" = c(Sys.Date() - 2, Sys.Date()),
+      "Letzten 7 Tage" = c(Sys.Date() - 6, Sys.Date()),
+      "Letzten 45 Tage" = c(Sys.Date() - 44, Sys.Date())
+    )
+  )
   expect_is(x, "shiny.tag")
   expect_length(object = htmltools::findDependencies(x), n = 2)
 
@@ -126,10 +162,13 @@ test_that("daterangepicker", {
     inputId = "daterange",
     icon = shiny::icon("calendar"),
     start = start, end = end,
-    ranges = list(Sys.Date() - 1, Sys.Date(), c(Sys.Date() - 2, Sys.Date()), c(Sys.Date() - 6, Sys.Date()),
-                  c(Sys.Date() - 44, Sys.Date())
+    ranges = list(
+      Sys.Date() - 1, Sys.Date(), c(Sys.Date() - 2, Sys.Date()),
+      c(Sys.Date() - 6, Sys.Date()),
+      c(Sys.Date() - 44, Sys.Date())
     ),
-    rangeNames = c("Gestern", "Heute", "Letzten 3 Tage", "Letzten 7 Tage", "Letzten 45 Tage")
+    rangeNames = c("Gestern", "Heute", "Letzten 3 Tage",
+                   "Letzten 7 Tage", "Letzten 45 Tage")
   )
   expect_is(x, "shiny.tag")
   expect_length(object = htmltools::findDependencies(x), n = 2)
@@ -137,10 +176,12 @@ test_that("daterangepicker", {
   x <- daterangepicker(
     inputId = "daterange",
     start = start, end = end,
-    ranges = data.frame("Gestern" = Sys.Date() - 1,
-                        "Heute" = Sys.Date(),
-                        "Letzten 45 Tage" = c(Sys.Date() - 44, Sys.Date())
-    ))
+    ranges = data.frame(
+      "Gestern" = Sys.Date() - 1,
+      "Heute" = Sys.Date(),
+      "Letzten 45 Tage" = c(Sys.Date() - 44, Sys.Date())
+    )
+  )
   expect_is(x, "shiny.tag")
   expect_length(object = htmltools::findDependencies(x), n = 1)
 
@@ -148,20 +189,24 @@ test_that("daterangepicker", {
   session <- as.environment(list(
     ns = identity,
     sendInputMessage = function(inputId, message) {
-      session$lastInputMessage = list(id = inputId, message = message)
+      session$lastInputMessage <- list(id = inputId, message = message)
     }
   ))
 
-  updateDaterangepicker(session, "daterange", label = "NewLabel",
-                        start = start, end = end)
+  updateDaterangepicker(session, "daterange",
+    label = "NewLabel",
+    start = start, end = end
+  )
   res <- session$lastInputMessage
   expect_identical(res$message$id, "daterange")
   expect_identical(res$message$label, "NewLabel")
   expect_identical(res$message$start, start)
   expect_identical(res$message$end, end)
 
-  updateDaterangepicker(session, "daterange", label = "NewLabel",
-                        start = start, end = end, icon = icon("calendar"))
+  updateDaterangepicker(session, "daterange",
+    label = "NewLabel",
+    start = start, end = end, icon = icon("calendar")
+  )
   res <- invisible(session$lastInputMessage)
   expect_identical(res$message$id, "daterange")
   expect_identical(res$message$label, "NewLabel")
@@ -178,16 +223,20 @@ test_that("daterangepicker", {
   x <- expect_warning(daterangepicker:::.onLoad()(war))
   expect_identical(x, war)
 
-  data <- list(start = start - 10,
-               end = end,
-               format = "Date")
+  data <- list(
+    start = start - 10,
+    end = end,
+    format = "Date"
+  )
   x <- daterangepicker:::.onLoad()(data)
   expect_identical(x[1], start - 10)
   expect_identical(x[2], end)
 
-  data <- list(start = start - 10,
-               end = end,
-               format = "POSIX")
+  data <- list(
+    start = start - 10,
+    end = end,
+    format = "POSIX"
+  )
   x <- daterangepicker:::.onLoad()(data)
   expect_identical(x[1], as.POSIXct(start - 10))
   expect_identical(x[2], as.POSIXct(end))

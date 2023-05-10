@@ -23,8 +23,8 @@ ui <- fluidPage(
         label = NULL,
         start = Sys.Date() - 30,
         end = as.Date(Sys.time()),
-        max = as.Date(Sys.time())+1,
-        min = Sys.Date()-100,
+        max = as.Date(Sys.time()) + 1,
+        min = Sys.Date() - 100,
         ranges = list(
           "Today" = Sys.Date(),
           "2 Days from 6:00 to 18:00" = c(
@@ -39,8 +39,8 @@ ui <- fluidPage(
           alwaysShowCalendars = TRUE,
           autoApply = TRUE,
           locale = list(
-            separator = ' - ',
-            format = 'DD-MM-Y HH:mm:ss'
+            separator = " - ",
+            format = "DD-MM-Y HH:mm:ss"
           )
         )
       )
@@ -64,8 +64,8 @@ server <- function(input, output, session) {
     updateDaterangepicker(
       session, "datepicker",
       start = Sys.Date(), end = Sys.Date() - 100,
-      min = Sys.Date()-20,
-      max = Sys.Date()-2,
+      min = Sys.Date() - 20,
+      max = Sys.Date() - 2,
       style = "border-radius:20px;text-align:left;color:red"
     )
   })
@@ -73,13 +73,14 @@ server <- function(input, output, session) {
     updateDaterangepicker(session, "datepicker", class = "somenewclass")
   })
   observeEvent(input$range, {
-    updateDaterangepicker(session, "datepicker",
-                          ranges = list(
-                            "Today" = Sys.Date(),
-                            "Last 400.000 ms" = c(Sys.time()-400000,Sys.time()),
-                            "Last 5 days" = c(Sys.Date() - 4, Sys.Date()),
-                            "Last 60 days" = c(Sys.Date() - 60, Sys.Date())
-                          ))
+    updateDaterangepicker(
+      session, "datepicker",
+      ranges = list(
+        "Today" = Sys.Date(),
+        "Last 400.000 ms" = c(Sys.time() - 400000, Sys.time()),
+        "Last 5 days" = c(Sys.Date() - 4, Sys.Date()),
+        "Last 60 days" = c(Sys.Date() - 60, Sys.Date())
+      ))
   })
 }
 

@@ -38,11 +38,13 @@ POSIXt or string. If NULL will default to the current day.}
 \item{ranges}{Set predefined date ranges the user can select from. Each key
 is the label for the range, and its value an array with two dates
 representing the bounds of the range.
-Alternatively, the labels can be specified via `rangeNames`. If that argument is used, `ranges` should not be
-named and `rangeNames` will take precedence..}
+Alternatively, the labels can be specified via `rangeNames`. If that
+argument is used, `ranges` should not be named and `rangeNames` will
+take precedence.}
 
-\item{rangeNames}{Optional character vector specifying the labels for predefined date ranges.
-If specified, it will override the names of `ranges`.}
+\item{rangeNames}{Optional character vector specifying the labels for
+predefined date ranges. If specified, it will override the names
+of `ranges`.}
 
 \item{language}{The language used for month and day names. Default is "en".
 See the \href{https://momentjs.com/}{Multiple Locale Support} for a list of
@@ -63,51 +65,56 @@ predefined ranges like "Yesterday", "Last 30 Days", etc.
 }
 \examples{
 if (interactive()) {
-library(shiny)
-library(daterangepicker)
-## UI ##########################
-ui <- fluidPage(
-  tags$head(tags$style(".myclass {background-color: #96dafb;}")),
-  daterangepicker(
-    inputId = "daterange",
-    label = "Pick a Date",
-    start = Sys.Date() - 30, end = Sys.Date(),
-    max = Sys.Date(),
-    language = "en",
-    ranges = list("Today" = Sys.Date(),
-                  "Yesterday" = Sys.Date() - 1,
-                  "Last 3 days" = c(Sys.Date() - 2, Sys.Date()),
-                  "Last 7 days" = c(Sys.Date() - 6, Sys.Date())
+  library(shiny)
+  library(daterangepicker)
+  ## UI ##########################
+  ui <- fluidPage(
+    tags$head(tags$style(".myclass {background-color: #96dafb;}")),
+    daterangepicker(
+      inputId = "daterange",
+      label = "Pick a Date",
+      start = Sys.Date() - 30, end = Sys.Date(),
+      max = Sys.Date(),
+      language = "en",
+      ranges = list(
+        "Today" = Sys.Date(),
+        "Yesterday" = Sys.Date() - 1,
+        "Last 3 days" = c(Sys.Date() - 2, Sys.Date()),
+        "Last 7 days" = c(Sys.Date() - 6, Sys.Date())
+      ),
+      style = "width:100\%; border-radius:4px",
+      class = "myclass",
+      icon = icon("calendar")
     ),
-    style = "width:100\%; border-radius:4px",
-    class = "myclass",
-    icon = icon("calendar")
-  ),
-  verbatimTextOutput("print"),
-  actionButton("act", "Update Daterangepicker"),
-)
-## SERVER ##########################
-server <- function(input, output, session) {
-  output$print <- renderPrint({
-    req(input$daterange)
-    input$daterange
-  })
-  observeEvent(input$act, {
-    updateDaterangepicker(
-      session, "daterange",
-      start = Sys.Date(),
-      end = Sys.Date() - 100,
-      ranges = list(Sys.Date(), Sys.Date() - 1,
-                    c(Sys.Date() - 3, Sys.Date()),
-                    c(Sys.Date() - 6, Sys.Date()),
-                    Sys.Date() + 2),
-      rangeNames = c("Today", "Yesterday", "Last 3 days",
-                     "Last 7 days", "The day after tomorrow \u263a"),
-      max = Sys.Date() + 2
-    )
-  })
-}
-shinyApp(ui, server)
+    verbatimTextOutput("print"),
+    actionButton("act", "Update Daterangepicker"),
+  )
+  ## SERVER ##########################
+  server <- function(input, output, session) {
+    output$print <- renderPrint({
+      req(input$daterange)
+      input$daterange
+    })
+    observeEvent(input$act, {
+      updateDaterangepicker(
+        session, "daterange",
+        start = Sys.Date(),
+        end = Sys.Date() - 100,
+        ranges = list(
+          Sys.Date(), Sys.Date() - 1,
+          c(Sys.Date() - 3, Sys.Date()),
+          c(Sys.Date() - 6, Sys.Date()),
+          Sys.Date() + 2
+        ),
+        rangeNames = c(
+          "Today", "Yesterday", "Last 3 days",
+          "Last 7 days", "The day after tomorrow \u263a"
+        ),
+        max = Sys.Date() + 2
+      )
+    })
+  }
+  shinyApp(ui, server)
 }
 }
 \seealso{
