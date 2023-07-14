@@ -6,7 +6,7 @@
     if (is.null(data)) {
       NULL
     } else {
-      if (data$start == "Invalid date") {
+      if (class(data$start) == "character" && data$start == "Invalid date") {
         NULL
       } else {
         ## Return POSIX or Date, depending on format
