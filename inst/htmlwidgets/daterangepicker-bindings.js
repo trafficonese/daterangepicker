@@ -50,7 +50,7 @@ $.extend(DateRangePickerBinding, {
       timePickerSeconds: options.timePickerSeconds !== undefined ? options.timePickerSeconds : false,
 
       linkedCalendars: options.linkedCalendars !== undefined ? options.linkedCalendars : true,
-      autoUpdateInput: options.autoUpdateInput ? options.autoUpdateInput : true,
+      autoUpdateInput: options.autoUpdateInput !== undefined ? options.autoUpdateInput : false,
       alwaysShowCalendars: options.alwaysShowCalendars !== undefined ? options.alwaysShowCalendars : false,
       ranges: options.ranges ? ranges : undefined,
       opens:  options.opens ? options.opens : "right",
@@ -67,6 +67,11 @@ $.extend(DateRangePickerBinding, {
   },
   getValue: function(el) {
     var res, start, end;
+
+    if ($(el).val() === '') {
+      return(null);
+    }
+
     // Get start/end time
     start = $(el).data("daterangepicker").startDate;
     end = $(el).data("daterangepicker").endDate;
@@ -76,8 +81,6 @@ $.extend(DateRangePickerBinding, {
       // Make a Timestamp
       res = {
         format: "POSIX",
-        //start: start.format('YYYY-MM-DD hh:mm:ss'),
-        //end: end.format('YYYY-MM-DD hh:mm:ss')
         start: start.unix(),
         end: end.unix()
       };
