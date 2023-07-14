@@ -223,6 +223,10 @@ test_that("daterangepicker", {
   x <- expect_warning(daterangepicker:::.onLoad()(war))
   expect_identical(x, war)
 
+  data <- list(start = "Invalid date")
+  x <- daterangepicker:::.onLoad()(data)
+  expect_null(x)
+
   data <- list(
     start = start - 10,
     end = end,
